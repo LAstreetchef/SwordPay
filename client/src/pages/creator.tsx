@@ -15,7 +15,8 @@ import {
   Globe,
   Share2,
 } from "lucide-react";
-import { SiTwitter, SiYoutube, SiInstagram } from "react-icons/si";
+import { SiX, SiYoutube, SiInstagram } from "react-icons/si";
+import { useSEO } from "@/hooks/use-seo";
 import type { Creator, Tier, Post } from "@shared/schema";
 
 export default function CreatorPage() {
@@ -33,6 +34,11 @@ export default function CreatorPage() {
   const { data: posts, isLoading: postsLoading } = useQuery<Post[]>({
     queryKey: ["/api/creators", params.slug, "posts"],
     enabled: !!creator,
+  });
+
+  useSEO({
+    title: creator ? `${creator.name} | Patreon` : "Creator | Patreon",
+    description: creator?.tagline || "Support this creator on Patreon.",
   });
 
   if (creatorLoading) {
@@ -110,7 +116,7 @@ export default function CreatorPage() {
           <div className="flex items-center gap-3 mb-8 flex-wrap" data-testid="social-links">
             {socialLinks.twitter && (
               <a href={socialLinks.twitter} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
-                <SiTwitter className="h-4 w-4" />
+                <SiX className="h-4 w-4" />
               </a>
             )}
             {socialLinks.youtube && (

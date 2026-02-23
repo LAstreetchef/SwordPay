@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { SiTwitter, SiInstagram, SiYoutube } from "react-icons/si";
+import { SiX, SiInstagram, SiYoutube } from "react-icons/si";
 
 export function Footer() {
   return (
@@ -48,7 +48,7 @@ export function Footer() {
           </div>
           <p className="text-sm opacity-60">2025 Patreon Clone. Built for demonstration purposes.</p>
           <div className="flex items-center gap-4">
-            <SiTwitter className="h-4 w-4 opacity-60 hover:opacity-100 cursor-pointer transition-opacity" />
+            <SiX className="h-4 w-4 opacity-60 hover:opacity-100 cursor-pointer transition-opacity" />
             <SiInstagram className="h-4 w-4 opacity-60 hover:opacity-100 cursor-pointer transition-opacity" />
             <SiYoutube className="h-4 w-4 opacity-60 hover:opacity-100 cursor-pointer transition-opacity" />
           </div>

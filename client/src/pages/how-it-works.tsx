@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { useSEO } from "@/hooks/use-seo";
 import {
   ArrowRight,
   Heart,
@@ -61,6 +62,11 @@ const patronBenefits = [
 ];
 
 export default function HowItWorks() {
+  useSEO({
+    title: "How Patreon Works | Patreon",
+    description: "Learn how Patreon helps creators earn recurring income from their fans and build sustainable creative careers.",
+  });
+
   return (
     <div className="min-h-screen" data-testid="page-how-it-works">
       <section className="bg-card border-b">

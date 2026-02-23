@@ -84,7 +84,12 @@ export default function Explore() {
           ))}
         </div>
 
-        {isLoading ? (
+        {error ? (
+          <div className="text-center py-20" data-testid="error-explore">
+            <AlertCircle className="h-10 w-10 text-muted-foreground mx-auto mb-3" />
+            <p className="text-muted-foreground">Unable to load creators right now. Please try again later.</p>
+          </div>
+        ) : isLoading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {Array.from({ length: 6 }).map((_, i) => (
               <CreatorCardSkeleton key={i} />
