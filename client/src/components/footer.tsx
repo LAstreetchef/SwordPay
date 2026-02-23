@@ -43,10 +43,10 @@ export function Footer() {
         <div className="border-t border-background/20 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <span className="text-lg font-bold">
-              <span className="text-primary">Patreon</span>
+              <span className="text-primary">Sword Creator</span>
             </span>
           </div>
-          <p className="text-sm opacity-60">2025 Patreon Clone. Built for demonstration purposes.</p>
+          <p className="text-sm opacity-60">2025 Sword Creator. Built for demonstration purposes.</p>
           <div className="flex items-center gap-4">
             <SiX className="h-4 w-4 opacity-60 hover:opacity-100 cursor-pointer transition-opacity" />
             <SiInstagram className="h-4 w-4 opacity-60 hover:opacity-100 cursor-pointer transition-opacity" />

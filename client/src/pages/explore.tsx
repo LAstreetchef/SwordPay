@@ -26,8 +26,8 @@ export default function Explore() {
   const initialCategory = params.get("category") || "All";
 
   useSEO({
-    title: "Explore Creators | Patreon",
-    description: "Discover and support amazing creators across art, music, podcasts, gaming, writing, and more on Patreon.",
+    title: "Explore Creators | Sword Creator",
+    description: "Discover and support amazing creators across art, music, podcasts, gaming, writing, and more on Sword Creator.",
   });
 
   const [searchTerm, setSearchTerm] = useState("");

@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is a **Patreon clone** — a creator membership platform where fans can discover and support creators across categories like art, music, podcasts, gaming, writing, and video. The app displays creator profiles with membership tiers, posts, and social links. It's a full-stack TypeScript application with a React frontend and Express backend, backed by PostgreSQL.
+This is **Sword Creator** — a creator membership platform (Patreon-style clone) where fans can discover and support creators across categories like art, music, podcasts, gaming, writing, and video. The app displays creator profiles with membership tiers, posts, and social links. It's a full-stack TypeScript application with a React frontend and Express backend, backed by PostgreSQL.
 
 The app currently supports browsing creators, viewing creator profiles with tiers and posts, and exploring by category. It seeds sample creator data on startup. There is no authentication or payment processing implemented yet — just the public-facing browsing experience.
 

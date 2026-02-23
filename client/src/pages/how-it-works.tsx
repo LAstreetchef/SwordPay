@@ -63,8 +63,8 @@ const patronBenefits = [
 
 export default function HowItWorks() {
   useSEO({
-    title: "How Patreon Works | Patreon",
-    description: "Learn how Patreon helps creators earn recurring income from their fans and build sustainable creative careers.",
+    title: "How Sword Creator Works | Sword Creator",
+    description: "Learn how Sword Creator helps creators earn recurring income from their fans and build sustainable creative careers.",
   });
 
   return (
@@ -72,7 +72,7 @@ export default function HowItWorks() {
       <section className="bg-card border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
           <h1 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight">
-            How Patreon works
+            How Sword Creator works
           </h1>
           <p className="text-lg text-muted-foreground max-w-xl mx-auto mb-8">
             A membership platform connecting creators with their biggest fans for

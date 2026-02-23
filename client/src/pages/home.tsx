@@ -40,8 +40,8 @@ const stats = [
 
 export default function Home() {
   useSEO({
-    title: "Patreon - Best way for creators to get paid",
-    description: "Patreon is a membership platform that makes it easy for artists and creators to get paid. Join over 250,000 creators earning a living.",
+    title: "Sword Creator - Best way for creators to get paid",
+    description: "Sword Creator is a membership platform that makes it easy for artists and creators to get paid. Join over 250,000 creators earning a living.",
   });
 
   const { data: featuredCreators, isLoading, error } = useQuery<Creator[]>({
@@ -67,7 +67,7 @@ export default function Home() {
               art is valued
             </h1>
             <p className="text-lg md:text-xl text-white/80 leading-relaxed mb-8 max-w-lg">
-              Patreon is a membership platform that makes it easy for artists and creators
+              Sword Creator is a membership platform that makes it easy for artists and creators
               to get paid. Join over 250,000 creators earning a living through their work.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
@@ -155,7 +155,7 @@ export default function Home() {
       <section className="py-20" data-testid="how-it-works-section">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
-            <h2 className="text-2xl md:text-3xl font-bold mb-3">How Patreon works</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-3">How Sword Creator works</h2>
             <p className="text-muted-foreground max-w-md mx-auto">
               A simple way to support the creators you love
             </p>

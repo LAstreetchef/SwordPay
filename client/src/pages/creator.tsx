@@ -37,8 +37,8 @@ export default function CreatorPage() {
   });
 
   useSEO({
-    title: creator ? `${creator.name} | Patreon` : "Creator | Patreon",
-    description: creator?.tagline || "Support this creator on Patreon.",
+    title: creator ? `${creator.name} | Sword Creator` : "Creator | Sword Creator",
+    description: creator?.tagline || "Support this creator on Sword Creator.",
   });
 
   if (creatorLoading) {
