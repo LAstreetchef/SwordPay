@@ -2,9 +2,9 @@
 
 ## Overview
 
-This is **Sword Creator** — a creator membership platform (Patreon-style clone) where fans can discover and support creators across categories like art, music, podcasts, gaming, writing, and video. The app displays creator profiles with membership tiers, posts, and social links. It's a full-stack TypeScript application with a React frontend and Express backend, backed by PostgreSQL.
+This is **Sword Creator** — a creator membership platform (Patreon-style clone) where fans can discover and support creators across categories like art, music, podcasts, gaming, writing, and video. The app displays creator profiles with membership tiers, posts, social links, and a shop for one-time product/service purchases (spot payments). It's a full-stack TypeScript application with a React frontend and Express backend, backed by PostgreSQL.
 
-The app currently supports browsing creators, viewing creator profiles with tiers and posts, and exploring by category. It seeds sample creator data on startup. There is no authentication or payment processing implemented yet — just the public-facing browsing experience.
+The app currently supports browsing creators, viewing creator profiles with tiers, posts, and products, and exploring by category. It seeds sample creator data on startup including 4 products per creator. There is no authentication or payment processing implemented yet — just the public-facing browsing experience.
 
 ## User Preferences
 
@@ -24,7 +24,7 @@ Preferred communication style: Simple, everyday language.
 Key pages:
 - `/` — Home page with featured creators, categories, and stats
 - `/explore` — Browse and filter creators by category/search
-- `/creator/:slug` — Individual creator profile with tiers and posts tabs
+- `/creator/:slug` — Individual creator profile with posts, shop, membership, and about tabs
 - `/how-it-works` — Informational page about the platform
 
 ### Backend
@@ -41,6 +41,7 @@ API Routes:
 - `GET /api/creators/:slug` — Single creator by slug
 - `GET /api/creators/:slug/tiers` — Tiers for a creator
 - `GET /api/creators/:slug/posts` — Posts for a creator
+- `GET /api/creators/:slug/products` — Products/services for a creator (spot payments)
 
 ### Data Layer
 - **Database**: PostgreSQL (required, via `DATABASE_URL` environment variable)
@@ -49,14 +50,16 @@ API Routes:
 - **Migrations**: Drizzle Kit with `drizzle-kit push` command (`npm run db:push`)
 - **Storage Pattern**: `IStorage` interface in `server/storage.ts` with `DatabaseStorage` implementation — abstracts all DB operations
 
-### Database Schema (4 tables)
+### Database Schema (5 tables)
 1. **users** — id (UUID), username (unique), password
 2. **creators** — id (UUID), name, slug (unique), tagline, description, category, avatarUrl, coverUrl, patronCount, postCount, isVerified, socialLinks (JSONB), createdAt
 3. **tiers** — id (UUID), creatorId, name, price (integer cents), description, benefits (text array), isPopular
 4. **posts** — id (UUID), creatorId, title, content, imageUrl, isPublic, minTierPrice, likeCount, commentCount, createdAt
+5. **products** — id (UUID), creatorId, name, description, price (integer cents), imageUrl, category (digital/physical/service), isFeatured, salesCount, createdAt
 
 ### Seeding
-- `server/seed.ts` automatically seeds sample creators, tiers, and posts on startup if the database is empty
+- `server/seed.ts` automatically seeds sample creators, tiers, posts, and products on startup if the database is empty
+- Each creator gets 4 tailored products (mix of digital downloads, physical goods, and services)
 
 ### Shared Code
 - The `shared/` directory contains the Drizzle schema and Zod types, used by both frontend (for TypeScript types) and backend (for DB operations and validation)

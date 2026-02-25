@@ -1,11 +1,12 @@
 import { eq } from "drizzle-orm";
 import { db } from "./db";
 import {
-  users, creators, tiers, posts,
+  users, creators, tiers, posts, products,
   type User, type InsertUser,
   type Creator, type InsertCreator,
   type Tier, type InsertTier,
   type Post, type InsertPost,
+  type Product, type InsertProduct,
 } from "@shared/schema";
 
 export interface IStorage {
@@ -20,6 +21,8 @@ export interface IStorage {
   createTier(tier: InsertTier): Promise<Tier>;
   getPostsByCreatorId(creatorId: string): Promise<Post[]>;
   createPost(post: InsertPost): Promise<Post>;
+  getProductsByCreatorId(creatorId: string): Promise<Product[]>;
+  createProduct(product: InsertProduct): Promise<Product>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -71,6 +74,15 @@ export class DatabaseStorage implements IStorage {
 
   async createPost(post: InsertPost): Promise<Post> {
     const [result] = await db.insert(posts).values(post).returning();
+    return result;
+  }
+
+  async getProductsByCreatorId(creatorId: string): Promise<Product[]> {
+    return db.select().from(products).where(eq(products.creatorId, creatorId));
+  }
+
+  async createProduct(product: InsertProduct): Promise<Product> {
+    const [result] = await db.insert(products).values(product).returning();
     return result;
   }
 }

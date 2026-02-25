@@ -7,6 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Skeleton } from "@/components/ui/skeleton";
 import { TierCard } from "@/components/tier-card";
 import { PostCard, PostCardSkeleton } from "@/components/post-card";
+import { ProductCard, ProductCardSkeleton } from "@/components/product-card";
 import {
   Users,
   FileText,
@@ -14,10 +15,11 @@ import {
   ExternalLink,
   Globe,
   Share2,
+  ShoppingBag,
 } from "lucide-react";
 import { SiX, SiYoutube, SiInstagram } from "react-icons/si";
 import { useSEO } from "@/hooks/use-seo";
-import type { Creator, Tier, Post } from "@shared/schema";
+import type { Creator, Tier, Post, Product } from "@shared/schema";
 
 export default function CreatorPage() {
   const params = useParams<{ slug: string }>();
@@ -33,6 +35,11 @@ export default function CreatorPage() {
 
   const { data: posts, isLoading: postsLoading } = useQuery<Post[]>({
     queryKey: ["/api/creators", params.slug, "posts"],
+    enabled: !!creator,
+  });
+
+  const { data: products, isLoading: productsLoading } = useQuery<Product[]>({
+    queryKey: ["/api/creators", params.slug, "products"],
     enabled: !!creator,
   });
 
@@ -141,6 +148,7 @@ export default function CreatorPage() {
         <Tabs defaultValue="posts" className="mb-16">
           <TabsList className="mb-6" data-testid="creator-tabs">
             <TabsTrigger value="posts" data-testid="tab-posts">Posts</TabsTrigger>
+            <TabsTrigger value="shop" data-testid="tab-shop">Shop</TabsTrigger>
             <TabsTrigger value="membership" data-testid="tab-membership">Membership</TabsTrigger>
             <TabsTrigger value="about" data-testid="tab-about">About</TabsTrigger>
           </TabsList>
@@ -169,6 +177,23 @@ export default function CreatorPage() {
                     ))
                   : tiers?.map((tier) => <TierCard key={tier.id} tier={tier} />)}
               </div>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="shop">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {productsLoading
+                ? Array.from({ length: 4 }).map((_, i) => (
+                    <ProductCardSkeleton key={i} />
+                  ))
+                : products && products.length > 0
+                ? products.map((product) => <ProductCard key={product.id} product={product} />)
+                : (
+                  <div className="col-span-full text-center py-12" data-testid="empty-products">
+                    <ShoppingBag className="h-10 w-10 text-muted-foreground mx-auto mb-3" />
+                    <p className="text-muted-foreground">No products available yet</p>
+                  </div>
+                )}
             </div>
           </TabsContent>
 

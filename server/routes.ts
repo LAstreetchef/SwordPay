@@ -62,5 +62,18 @@ export async function registerRoutes(
     }
   });
 
+  app.get("/api/creators/:slug/products", async (req, res) => {
+    try {
+      const creator = await storage.getCreatorBySlug(req.params.slug);
+      if (!creator) {
+        return res.status(404).json({ message: "Creator not found" });
+      }
+      const productsList = await storage.getProductsByCreatorId(creator.id);
+      res.json(productsList);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch products" });
+    }
+  });
+
   return httpServer;
 }

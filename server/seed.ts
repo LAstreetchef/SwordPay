@@ -1,5 +1,5 @@
 import { db } from "./db";
-import { creators, tiers, posts } from "@shared/schema";
+import { creators, tiers, posts, products } from "@shared/schema";
 import { log } from "./index";
 
 export async function seedDatabase() {
@@ -161,6 +161,234 @@ export async function seedDatabase() {
   ]);
 
   await db.insert(posts).values(postData);
+
+  const creatorBySlug = Object.fromEntries(insertedCreators.map(c => [c.slug, c]));
+
+  const productData = [
+    {
+      creatorId: creatorBySlug["luna-artistry"].id,
+      name: "Custom Character Portrait",
+      description: "A fully rendered digital portrait of your original character or D&D persona. Includes two revision rounds and delivery in high-res PNG and PSD formats.",
+      price: 7500,
+      category: "service",
+      isFeatured: true,
+      salesCount: 142,
+    },
+    {
+      creatorId: creatorBySlug["luna-artistry"].id,
+      name: "Fantasy Brush Pack Vol. 3",
+      description: "50+ custom Procreate and Photoshop brushes for painting fantasy environments, foliage, clouds, and magical effects.",
+      price: 1500,
+      category: "digital",
+      isFeatured: false,
+      salesCount: 583,
+    },
+    {
+      creatorId: creatorBySlug["luna-artistry"].id,
+      name: "4K Wallpaper Collection",
+      description: "A curated set of 12 ultra-high-resolution fantasy wallpapers for desktop and mobile, updated quarterly.",
+      price: 800,
+      category: "digital",
+      isFeatured: false,
+      salesCount: 921,
+    },
+    {
+      creatorId: creatorBySlug["luna-artistry"].id,
+      name: "Signed Art Print Bundle",
+      description: "Set of 5 museum-quality giclée prints (8×10\") of Luna's most popular illustrations, hand-signed and shipped worldwide.",
+      price: 4500,
+      category: "physical",
+      isFeatured: true,
+      salesCount: 67,
+    },
+
+    {
+      creatorId: creatorBySlug["echo-sound-studio"].id,
+      name: "Ambient Sample Pack",
+      description: "200+ royalty-free ambient textures, field recordings, and atmospheric loops. WAV format, perfect for film, games, and music production.",
+      price: 2500,
+      category: "digital",
+      isFeatured: true,
+      salesCount: 347,
+    },
+    {
+      creatorId: creatorBySlug["echo-sound-studio"].id,
+      name: "1-on-1 Mixing Consultation",
+      description: "60-minute video call where I review your track, give feedback on your mix, and share production tips tailored to your style.",
+      price: 12000,
+      category: "service",
+      isFeatured: false,
+      salesCount: 28,
+    },
+    {
+      creatorId: creatorBySlug["echo-sound-studio"].id,
+      name: "Custom Beat Production",
+      description: "A fully produced custom beat in your preferred genre and tempo. Includes stems, 2 revisions, and commercial use license.",
+      price: 20000,
+      category: "service",
+      isFeatured: true,
+      salesCount: 15,
+    },
+    {
+      creatorId: creatorBySlug["echo-sound-studio"].id,
+      name: "Lo-Fi Loop Kit",
+      description: "80 hand-crafted lo-fi loops — keys, guitar, vinyl crackle, and drum patterns. Royalty-free for any project.",
+      price: 1200,
+      category: "digital",
+      isFeatured: false,
+      salesCount: 612,
+    },
+
+    {
+      creatorId: creatorBySlug["the-daily-curious"].id,
+      name: "Deep Dive Research Report",
+      description: "A 30-page PDF exploring one topic in depth — fully sourced, beautifully formatted, with exclusive data visualizations.",
+      price: 999,
+      category: "digital",
+      isFeatured: true,
+      salesCount: 204,
+    },
+    {
+      creatorId: creatorBySlug["the-daily-curious"].id,
+      name: "Signed Podcast Merch Bundle",
+      description: "Limited-edition mug, sticker sheet, and enamel pin featuring The Daily Curious branding. Signed card included.",
+      price: 3500,
+      category: "physical",
+      isFeatured: false,
+      salesCount: 89,
+    },
+    {
+      creatorId: creatorBySlug["the-daily-curious"].id,
+      name: "Sponsor a Segment",
+      description: "Get a 60-second sponsor slot on an upcoming episode reaching 50,000+ listeners. Includes script collaboration and analytics report.",
+      price: 50000,
+      category: "service",
+      isFeatured: true,
+      salesCount: 6,
+    },
+    {
+      creatorId: creatorBySlug["the-daily-curious"].id,
+      name: "Live Recording Event Ticket",
+      description: "Virtual ticket to our quarterly live recording event. Includes live Q&A, behind-the-scenes access, and a recording of the session.",
+      price: 1500,
+      category: "service",
+      isFeatured: false,
+      salesCount: 312,
+    },
+
+    {
+      creatorId: creatorBySlug["pixelforge-games"].id,
+      name: "Starlight Wanderer Soundtrack",
+      description: "The complete 24-track original soundtrack in FLAC and MP3. Over 70 minutes of chiptune and orchestral hybrid music.",
+      price: 999,
+      category: "digital",
+      isFeatured: true,
+      salesCount: 456,
+    },
+    {
+      creatorId: creatorBySlug["pixelforge-games"].id,
+      name: "Early Access Beta Key",
+      description: "Get immediate access to the latest Starlight Wanderer beta build. Includes all future updates through launch.",
+      price: 1999,
+      category: "digital",
+      isFeatured: true,
+      salesCount: 178,
+    },
+    {
+      creatorId: creatorBySlug["pixelforge-games"].id,
+      name: "Custom Pixel Sprite Commission",
+      description: "A custom 64×64 pixel art sprite of your character, pet, or avatar. Includes idle animation (4 frames) and transparent PNG.",
+      price: 3500,
+      category: "service",
+      isFeatured: false,
+      salesCount: 93,
+    },
+    {
+      creatorId: creatorBySlug["pixelforge-games"].id,
+      name: "Retro Sticker Pack",
+      description: "Set of 8 die-cut vinyl stickers featuring characters and items from PixelForge games. Weatherproof and laptop-friendly.",
+      price: 1200,
+      category: "physical",
+      isFeatured: false,
+      salesCount: 234,
+    },
+
+    {
+      creatorId: creatorBySlug["wordcraft-weekly"].id,
+      name: "Manuscript Critique (10K words)",
+      description: "Detailed written feedback on up to 10,000 words of your fiction manuscript. Covers structure, voice, pacing, and line-level craft.",
+      price: 15000,
+      category: "service",
+      isFeatured: true,
+      salesCount: 41,
+    },
+    {
+      creatorId: creatorBySlug["wordcraft-weekly"].id,
+      name: "Fiction Writing Masterclass",
+      description: "Self-paced video course with 12 modules covering character development, plot structure, dialogue, and revision. Lifetime access.",
+      price: 4900,
+      category: "digital",
+      isFeatured: true,
+      salesCount: 189,
+    },
+    {
+      creatorId: creatorBySlug["wordcraft-weekly"].id,
+      name: "Short Story Collection (eBook)",
+      description: "\"Threads of Light\" — a collection of 15 original short stories spanning literary fiction, speculative fiction, and magical realism. EPUB & PDF.",
+      price: 799,
+      category: "digital",
+      isFeatured: false,
+      salesCount: 534,
+    },
+    {
+      creatorId: creatorBySlug["wordcraft-weekly"].id,
+      name: "1-Hour Editing Session",
+      description: "Live 60-minute video session where we work through your manuscript together. Real-time feedback and revision coaching.",
+      price: 9900,
+      category: "service",
+      isFeatured: false,
+      salesCount: 22,
+    },
+
+    {
+      creatorId: creatorBySlug["creative-spark-academy"].id,
+      name: "Complete Course Bundle",
+      description: "Lifetime access to all 8 courses: Digital Painting Fundamentals, Color Theory, Anatomy for Artists, Perspective, and more. 60+ hours of content.",
+      price: 9900,
+      category: "digital",
+      isFeatured: true,
+      salesCount: 267,
+    },
+    {
+      creatorId: creatorBySlug["creative-spark-academy"].id,
+      name: "Anatomy Reference Sheet Pack",
+      description: "Printable PDF set of 30 detailed anatomy reference sheets — poses, hands, feet, faces, and figure proportions.",
+      price: 1200,
+      category: "digital",
+      isFeatured: false,
+      salesCount: 845,
+    },
+    {
+      creatorId: creatorBySlug["creative-spark-academy"].id,
+      name: "1-on-1 Portfolio Review",
+      description: "45-minute video call to review your art portfolio with constructive feedback, career advice, and personalized study plan.",
+      price: 7500,
+      category: "service",
+      isFeatured: true,
+      salesCount: 56,
+    },
+    {
+      creatorId: creatorBySlug["creative-spark-academy"].id,
+      name: "Procreate Brush Mega Set",
+      description: "120 custom Procreate brushes organized into 6 categories: sketching, inking, painting, textures, effects, and lettering.",
+      price: 1800,
+      category: "digital",
+      isFeatured: false,
+      salesCount: 723,
+    },
+  ];
+
+  await db.insert(products).values(productData);
 
   log("Database seeded successfully!", "seed");
 }
