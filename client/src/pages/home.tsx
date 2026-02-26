@@ -64,7 +64,7 @@ export default function Home() {
             <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight tracking-tight mb-6">
               Profit from Your Passion
             </h1>
-            <p className="text-2xl md:text-[2.625rem] text-white/80 leading-relaxed mb-8 max-w-lg">
+            <p className="text-4xl md:text-6xl font-bold text-white leading-tight tracking-tight mb-8 max-w-lg">
               Create. Profit. Repeat.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
