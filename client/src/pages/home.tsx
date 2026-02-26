@@ -62,13 +62,10 @@ export default function Home() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-36">
           <div className="max-w-2xl">
             <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight tracking-tight mb-6">
-              Change the way
-              <br />
-              art is valued
+              Profit from Your Passion
             </h1>
             <p className="text-lg md:text-xl text-white/80 leading-relaxed mb-8 max-w-lg">
-              Sword Creator is a membership platform that makes it easy for artists and creators
-              to get paid. Join over 250,000 creators earning a living through their work.
+              Create. Profit. Repeat.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Link href="/explore">
