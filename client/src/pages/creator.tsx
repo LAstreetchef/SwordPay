@@ -1,16 +1,10 @@
-import { useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "wouter";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import {
-  ProductCard,
-  ProductCardSkeleton,
-  HeroProductCard,
-  HeroProductCardSkeleton,
-} from "@/components/product-card";
+import { ProductCard, ProductCardSkeleton } from "@/components/product-card";
 import {
   Users,
   CheckCircle,
@@ -22,16 +16,8 @@ import { SiX, SiYoutube, SiInstagram } from "react-icons/si";
 import { useSEO } from "@/hooks/use-seo";
 import type { Creator, Product } from "@shared/schema";
 
-const CATEGORY_FILTERS = [
-  { label: "All", value: "all" },
-  { label: "Digital", value: "digital" },
-  { label: "Physical", value: "physical" },
-  { label: "Services", value: "service" },
-] as const;
-
 export default function CreatorPage() {
   const params = useParams<{ slug: string }>();
-  const [activeFilter, setActiveFilter] = useState<string>("all");
 
   const { data: creator, isLoading: creatorLoading } = useQuery<Creator>({
     queryKey: ["/api/creators", params.slug],
@@ -41,19 +27,6 @@ export default function CreatorPage() {
     queryKey: ["/api/creators", params.slug, "products"],
     enabled: !!creator,
   });
-
-  const sortedProducts = useMemo(() => {
-    if (!products) return [];
-    return [...products].sort((a, b) => b.salesCount - a.salesCount);
-  }, [products]);
-
-  const heroProduct = sortedProducts[0] || null;
-
-  const gridProducts = useMemo(() => {
-    const rest = sortedProducts.slice(1);
-    if (activeFilter === "all") return rest;
-    return rest.filter((p) => p.category === activeFilter);
-  }, [sortedProducts, activeFilter]);
 
   useSEO({
     title: creator ? `${creator.name} | Sword Creator` : "Creator | Sword Creator",
@@ -140,59 +113,20 @@ export default function CreatorPage() {
 
         <div className="border-b border-border mb-8" />
 
+        <h2 className="text-lg font-semibold mb-6" data-testid="text-store-heading">Store</h2>
+
         {productsLoading ? (
-          <>
-            <HeroProductCardSkeleton />
-            <div className="mt-10">
-              <Skeleton className="h-5 w-16 mb-6" />
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-5">
-                {Array.from({ length: 6 }).map((_, i) => (
-                  <ProductCardSkeleton key={i} />
-                ))}
-              </div>
-            </div>
-          </>
-        ) : sortedProducts.length > 0 ? (
-          <>
-            {heroProduct && <HeroProductCard product={heroProduct} />}
-
-            <div className="mt-10">
-              <div className="flex items-center justify-between mb-6 flex-wrap gap-3">
-                <h2 className="text-lg font-semibold" data-testid="text-store-heading">
-                  All Products
-                  <span className="text-sm font-normal text-muted-foreground ml-2">
-                    ({gridProducts.length})
-                  </span>
-                </h2>
-                <div className="flex gap-1.5" data-testid="filter-categories">
-                  {CATEGORY_FILTERS.map((filter) => (
-                    <Button
-                      key={filter.value}
-                      variant={activeFilter === filter.value ? "default" : "outline"}
-                      size="sm"
-                      className="text-xs h-8 px-3"
-                      onClick={() => setActiveFilter(filter.value)}
-                      data-testid={`filter-${filter.value}`}
-                    >
-                      {filter.label}
-                    </Button>
-                  ))}
-                </div>
-              </div>
-
-              {gridProducts.length > 0 ? (
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-5">
-                  {gridProducts.map((product) => (
-                    <ProductCard key={product.id} product={product} />
-                  ))}
-                </div>
-              ) : (
-                <div className="text-center py-12" data-testid="empty-filtered-products">
-                  <p className="text-muted-foreground text-sm">No products in this category</p>
-                </div>
-              )}
-            </div>
-          </>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-5 gap-y-8">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <ProductCardSkeleton key={i} />
+            ))}
+          </div>
+        ) : products && products.length > 0 ? (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-5 gap-y-8">
+            {products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
         ) : (
           <div className="text-center py-20" data-testid="empty-products">
             <ShoppingBag className="h-10 w-10 text-muted-foreground mx-auto mb-3" />
@@ -220,14 +154,11 @@ function CreatorPageSkeleton() {
           </div>
         </div>
         <div className="border-b border-border mb-8" />
-        <HeroProductCardSkeleton />
-        <div className="mt-10">
-          <Skeleton className="h-5 w-16 mb-6" />
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-5">
-            {Array.from({ length: 6 }).map((_, i) => (
-              <ProductCardSkeleton key={i} />
-            ))}
-          </div>
+        <Skeleton className="h-5 w-16 mb-6" />
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-5 gap-y-8">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <ProductCardSkeleton key={i} />
+          ))}
         </div>
       </div>
     </div>
