@@ -123,6 +123,37 @@ export default function Home() {
       </section>
 
 
+      <section className="relative overflow-hidden" data-testid="hero-video-section">
+        <div className="absolute inset-0">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover"
+          >
+            <source src="/images/hero-video.mov" type="video/quicktime" />
+          </video>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70" />
+        </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-36">
+          <div className="max-w-2xl">
+            <h2 className="text-4xl md:text-6xl font-bold text-white leading-tight tracking-tight mb-4">
+              Your Fans Want to Support You
+            </h2>
+            <p className="text-lg md:text-xl text-white/80 mb-8 max-w-lg">
+              Sell digital products, offer services, and build a thriving community — all in one place.
+            </p>
+            <Link href="/explore">
+              <Button size="lg" className="text-base px-8 bg-blue-600 hover:bg-blue-700" data-testid="button-hero2-explore">
+                Explore creators
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <section className="py-20" data-testid="featured-creators-section">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-4 mb-10">
