@@ -236,7 +236,7 @@ export default function Home() {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-lg font-bold uppercase tracking-wide text-blue-600 mb-2">Marketing</h3>
+              <h3 className="text-xl font-extrabold uppercase tracking-wide text-blue-600 mb-2">Marketing</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 Join DAZN and other leading brands on SWORD, and gain access to a global audience.
               </p>
@@ -249,7 +249,7 @@ export default function Home() {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-lg font-bold uppercase tracking-wide text-blue-600 mb-2">Global Payments</h3>
+              <h3 className="text-xl font-extrabold uppercase tracking-wide text-blue-600 mb-2">Global Payments</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 Accept and Send unlimited Payments from anywhere in the world.
               </p>
@@ -262,7 +262,7 @@ export default function Home() {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-lg font-bold uppercase tracking-wide text-blue-600 mb-2">Higher Conversion</h3>
+              <h3 className="text-xl font-extrabold uppercase tracking-wide text-blue-600 mb-2">Higher Conversion</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 Our streamlined checkout experience removes all friction, enhancing user retention and maximizing conversion.
               </p>
