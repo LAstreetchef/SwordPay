@@ -53,58 +53,55 @@ export default function CreatorPage() {
   return (
     <div className="min-h-screen" data-testid={`page-creator-${creator.slug}`}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-0.5 pb-12">
-        <div className="flex items-center gap-3 mb-4">
-          <Avatar className="h-14 w-14 border-2 border-border" data-testid="avatar-creator">
+        <div className="flex items-center gap-2 mb-3 overflow-x-auto whitespace-nowrap">
+          <Avatar className="h-10 w-10 border-2 border-border shrink-0" data-testid="avatar-creator">
             <AvatarImage src={creator.avatarUrl} alt={creator.name} />
-            <AvatarFallback className="text-xl font-bold bg-primary text-primary-foreground">
+            <AvatarFallback className="text-sm font-bold bg-primary text-primary-foreground">
               {creator.name.charAt(0)}
             </AvatarFallback>
           </Avatar>
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 flex-wrap">
-              <h1 className="text-xl md:text-2xl font-bold" data-testid="text-creator-page-name">
-                {creator.name}
-              </h1>
-              {creator.isVerified && (
-                <CheckCircle className="h-4 w-4 text-primary" />
-              )}
-              <Badge variant="secondary" className="no-default-active-elevate text-xs">
-                {creator.category}
-              </Badge>
-              <span className="flex items-center gap-1 text-xs text-muted-foreground">
-                <Users className="h-3.5 w-3.5" />
-                {creator.patronCount.toLocaleString()} patrons
-              </span>
-            </div>
-            <p className="text-muted-foreground text-sm mt-0.5">{creator.tagline}</p>
-          </div>
-          <div className="flex items-center gap-1 shrink-0">
+          <h1 className="text-lg font-bold shrink-0" data-testid="text-creator-page-name">
+            {creator.name}
+          </h1>
+          {creator.isVerified && (
+            <CheckCircle className="h-4 w-4 text-primary shrink-0" />
+          )}
+          <Badge variant="secondary" className="no-default-active-elevate text-xs shrink-0">
+            {creator.category}
+          </Badge>
+          <span className="flex items-center gap-1 text-xs text-muted-foreground shrink-0">
+            <Users className="h-3.5 w-3.5" />
+            {creator.patronCount.toLocaleString()} patrons
+          </span>
+          <span className="text-muted-foreground text-xs shrink-0 hidden sm:inline">·</span>
+          <p className="text-muted-foreground text-xs shrink-0 hidden sm:inline truncate">{creator.tagline}</p>
+          <div className="flex items-center gap-0.5 shrink-0 ml-auto">
             {socialLinks && (
               <>
                 {socialLinks.twitter && (
                   <a href={socialLinks.twitter} target="_blank" rel="noopener noreferrer">
-                    <Button variant="ghost" size="icon" className="h-8 w-8"><SiX className="h-3.5 w-3.5" /></Button>
+                    <Button variant="ghost" size="icon" className="h-7 w-7"><SiX className="h-3 w-3" /></Button>
                   </a>
                 )}
                 {socialLinks.youtube && (
                   <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer">
-                    <Button variant="ghost" size="icon" className="h-8 w-8"><SiYoutube className="h-3.5 w-3.5" /></Button>
+                    <Button variant="ghost" size="icon" className="h-7 w-7"><SiYoutube className="h-3 w-3" /></Button>
                   </a>
                 )}
                 {socialLinks.instagram && (
                   <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer">
-                    <Button variant="ghost" size="icon" className="h-8 w-8"><SiInstagram className="h-3.5 w-3.5" /></Button>
+                    <Button variant="ghost" size="icon" className="h-7 w-7"><SiInstagram className="h-3 w-3" /></Button>
                   </a>
                 )}
                 {socialLinks.website && (
                   <a href={socialLinks.website} target="_blank" rel="noopener noreferrer">
-                    <Button variant="ghost" size="icon" className="h-8 w-8"><Globe className="h-3.5 w-3.5" /></Button>
+                    <Button variant="ghost" size="icon" className="h-7 w-7"><Globe className="h-3 w-3" /></Button>
                   </a>
                 )}
               </>
             )}
-            <Button variant="ghost" size="icon" className="h-8 w-8" data-testid="button-share-creator">
-              <Share2 className="h-3.5 w-3.5" />
+            <Button variant="ghost" size="icon" className="h-7 w-7" data-testid="button-share-creator">
+              <Share2 className="h-3 w-3" />
             </Button>
           </div>
         </div>
