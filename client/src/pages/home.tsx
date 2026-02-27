@@ -112,14 +112,8 @@ export default function Home() {
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-3">
-              <Link href="/explore">
-                <Button size="lg" className="text-base px-8 bg-blue-600 hover:bg-blue-700" data-testid="button-hero-explore">
-                  Find a creator
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
               <Link href="/how-it-works">
-                <Button size="lg" variant="outline" className="text-base px-8 bg-white/10 backdrop-blur-sm border-white/20 text-white" data-testid="button-hero-create">
+                <Button size="lg" className="text-base px-8 bg-blue-600 hover:bg-blue-700" data-testid="button-hero-create">
                   Start creating
                 </Button>
               </Link>
