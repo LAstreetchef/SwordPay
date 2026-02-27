@@ -46,7 +46,7 @@ export function Navbar() {
               </Button>
             </Link>
             <Link href="/explore">
-              <Button variant="default" size="sm" data-testid="button-find-creator">
+              <Button variant="default" size="sm" className="bg-blue-600 hover:bg-blue-700" data-testid="button-find-creator">
                 Find a creator
               </Button>
             </Link>
@@ -77,7 +77,7 @@ export function Navbar() {
             </Button>
           </Link>
           <Link href="/explore" onClick={() => setMobileMenuOpen(false)}>
-            <Button variant="default" className="w-full" data-testid="mobile-button-find">
+            <Button variant="default" className="w-full bg-blue-600 hover:bg-blue-700" data-testid="mobile-button-find">
               Find a creator
             </Button>
           </Link>
