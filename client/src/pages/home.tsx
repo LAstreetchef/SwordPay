@@ -35,14 +35,9 @@ const categories = [
 
 
 function useHeroAnimation() {
-  const [phase, setPhase] = useState<"heading-in" | "heading-out" | "words">("heading-in");
+  const [phase, setPhase] = useState<"heading-in" | "heading-out" | "words" | "done">("heading-in");
   const [wordIndex, setWordIndex] = useState(-1);
   const words = ["Create.", "Profit.", "Repeat."];
-
-  const restart = useCallback(() => {
-    setPhase("heading-in");
-    setWordIndex(-1);
-  }, []);
 
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout>;
@@ -58,12 +53,12 @@ function useHeroAnimation() {
       if (wordIndex < words.length - 1) {
         timer = setTimeout(() => setWordIndex((i) => i + 1), 600);
       } else {
-        timer = setTimeout(() => restart(), 2500);
+        setPhase("done");
       }
     }
 
     return () => clearTimeout(timer);
-  }, [phase, wordIndex, restart]);
+  }, [phase, wordIndex]);
 
   return { phase, wordIndex, words };
 }
