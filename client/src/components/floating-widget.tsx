@@ -8,7 +8,7 @@ export function FloatingWidget() {
   if (!open) return null;
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 w-[280px] bg-white dark:bg-zinc-900 rounded-2xl shadow-2xl border border-border overflow-hidden" data-testid="floating-widget">
+    <div className="fixed bottom-6 right-6 z-50 w-[280px] bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/30 dark:border-white/10 overflow-hidden" data-testid="floating-widget">
       <button
         onClick={() => setOpen(false)}
         className="absolute top-2 right-2 text-muted-foreground hover:text-foreground z-10"
