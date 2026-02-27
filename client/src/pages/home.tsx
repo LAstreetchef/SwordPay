@@ -154,26 +154,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-20 bg-card" data-testid="categories-section">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold mb-3">Explore by category</h2>
-            <p className="text-muted-foreground max-w-md mx-auto">
-              From art to education, find creators in every field
-            </p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {categories.map((cat) => (
-              <Link key={cat.name} href={`/explore?category=${encodeURIComponent(cat.name)}`}>
-                <Card className="p-5 text-center hover-elevate cursor-pointer border-card-border transition-all duration-200">
-                  <cat.icon className={`h-8 w-8 mx-auto mb-3 ${cat.color}`} />
-                  <p className="text-sm font-medium">{cat.name}</p>
-                </Card>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
 
       <section className="py-20" data-testid="how-it-works-section">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
