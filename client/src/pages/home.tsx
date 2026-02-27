@@ -113,7 +113,7 @@ export default function Home() {
             </div>
             <div className="flex flex-col sm:flex-row gap-3">
               <Link href="/explore">
-                <Button size="lg" className="text-base px-8" data-testid="button-hero-explore">
+                <Button size="lg" className="text-base px-8 bg-blue-600 hover:bg-blue-700" data-testid="button-hero-explore">
                   Find a creator
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
