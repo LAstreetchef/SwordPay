@@ -10,7 +10,7 @@ export function ProductCard({ product }: { product: Product }) {
       className="group cursor-pointer"
       data-testid={`card-product-${product.id}`}
     >
-      <div className="aspect-square w-full max-w-[50%] overflow-hidden rounded-lg mb-3 relative">
+      <div className="aspect-square w-full overflow-hidden rounded-lg mb-2 relative">
         <img
           src={product.imageUrl || "/images/product-placeholder.png"}
           alt={product.name}

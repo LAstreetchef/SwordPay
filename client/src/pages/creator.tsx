@@ -52,8 +52,8 @@ export default function CreatorPage() {
 
   return (
     <div className="min-h-screen" data-testid={`page-creator-${creator.slug}`}>
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-16">
-        <div className="flex flex-col md:flex-row md:items-center gap-5 mb-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-12">
+        <div className="flex flex-col md:flex-row md:items-center gap-4 mb-6">
           <Avatar className="h-20 w-20 border-2 border-border" data-testid="avatar-creator">
             <AvatarImage src={creator.avatarUrl} alt={creator.name} />
             <AvatarFallback className="text-2xl font-bold bg-primary text-primary-foreground">
@@ -111,18 +111,18 @@ export default function CreatorPage() {
           </div>
         </div>
 
-        <div className="border-b border-border mb-8" />
+        <div className="border-b border-border mb-5" />
 
-        <h2 className="text-lg font-semibold mb-6" data-testid="text-store-heading">Store</h2>
+        <h2 className="text-lg font-semibold mb-4" data-testid="text-store-heading">Store</h2>
 
         {productsLoading ? (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-5 gap-y-8">
-            {Array.from({ length: 8 }).map((_, i) => (
+          <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+            {Array.from({ length: 10 }).map((_, i) => (
               <ProductCardSkeleton key={i} />
             ))}
           </div>
         ) : products && products.length > 0 ? (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-5 gap-y-8">
+          <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
             {products.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
@@ -141,8 +141,8 @@ export default function CreatorPage() {
 function CreatorPageSkeleton() {
   return (
     <div className="min-h-screen">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-16">
-        <div className="flex items-center gap-5 mb-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-12">
+        <div className="flex items-center gap-4 mb-6">
           <Skeleton className="h-20 w-20 rounded-full" />
           <div className="space-y-2 flex-1">
             <Skeleton className="h-7 w-48" />
@@ -153,10 +153,10 @@ function CreatorPageSkeleton() {
             </div>
           </div>
         </div>
-        <div className="border-b border-border mb-8" />
-        <Skeleton className="h-5 w-16 mb-6" />
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-5 gap-y-8">
-          {Array.from({ length: 8 }).map((_, i) => (
+        <div className="border-b border-border mb-5" />
+        <Skeleton className="h-5 w-16 mb-4" />
+        <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+          {Array.from({ length: 10 }).map((_, i) => (
             <ProductCardSkeleton key={i} />
           ))}
         </div>
