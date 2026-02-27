@@ -157,7 +157,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden h-[500px] md:h-[600px]" data-testid="hero2-section">
+      <section className="relative overflow-hidden h-[300px] md:h-[350px]" data-testid="hero2-section">
         {hero2Slides.map((s, i) => (
           <div
             key={i}
