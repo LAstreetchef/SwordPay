@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
+import { FloatingWidget } from "@/components/floating-widget";
 import Home from "@/pages/home";
 import Explore from "@/pages/explore";
 import CreatorPage from "@/pages/creator";
@@ -37,6 +38,7 @@ function App() {
           </main>
           {!isCreatorPage && <Footer />}
         </div>
+        <FloatingWidget />
         <Toaster />
       </TooltipProvider>
     </QueryClientProvider>
