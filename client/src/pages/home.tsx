@@ -198,7 +198,7 @@ export default function Home() {
           <img
             src="/images/hero3-bg.webp"
             alt=""
-            className="w-full h-full object-cover object-[center_75%]"
+            className="w-full h-full object-cover object-[center_35%]"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
         </div>
