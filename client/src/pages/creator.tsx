@@ -53,24 +53,21 @@ export default function CreatorPage() {
   return (
     <div className="min-h-screen" data-testid={`page-creator-${creator.slug}`}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-12">
-        <div className="flex flex-col md:flex-row md:items-center gap-4 mb-6">
-          <Avatar className="h-20 w-20 border-2 border-border" data-testid="avatar-creator">
+        <div className="flex items-center gap-3 mb-4">
+          <Avatar className="h-14 w-14 border-2 border-border" data-testid="avatar-creator">
             <AvatarImage src={creator.avatarUrl} alt={creator.name} />
-            <AvatarFallback className="text-2xl font-bold bg-primary text-primary-foreground">
+            <AvatarFallback className="text-xl font-bold bg-primary text-primary-foreground">
               {creator.name.charAt(0)}
             </AvatarFallback>
           </Avatar>
-          <div className="flex-1">
-            <div className="flex items-center gap-2 mb-1 flex-wrap">
-              <h1 className="text-2xl md:text-3xl font-bold" data-testid="text-creator-page-name">
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2 flex-wrap">
+              <h1 className="text-xl md:text-2xl font-bold" data-testid="text-creator-page-name">
                 {creator.name}
               </h1>
               {creator.isVerified && (
-                <CheckCircle className="h-5 w-5 text-primary" />
+                <CheckCircle className="h-4 w-4 text-primary" />
               )}
-            </div>
-            <p className="text-muted-foreground text-sm">{creator.tagline}</p>
-            <div className="flex items-center gap-3 mt-2 flex-wrap">
               <Badge variant="secondary" className="no-default-active-elevate text-xs">
                 {creator.category}
               </Badge>
@@ -79,39 +76,40 @@ export default function CreatorPage() {
                 {creator.patronCount.toLocaleString()} patrons
               </span>
             </div>
+            <p className="text-muted-foreground text-sm mt-0.5">{creator.tagline}</p>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 shrink-0">
             {socialLinks && (
               <>
                 {socialLinks.twitter && (
                   <a href={socialLinks.twitter} target="_blank" rel="noopener noreferrer">
-                    <Button variant="ghost" size="icon" className="h-9 w-9"><SiX className="h-4 w-4" /></Button>
+                    <Button variant="ghost" size="icon" className="h-8 w-8"><SiX className="h-3.5 w-3.5" /></Button>
                   </a>
                 )}
                 {socialLinks.youtube && (
                   <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer">
-                    <Button variant="ghost" size="icon" className="h-9 w-9"><SiYoutube className="h-4 w-4" /></Button>
+                    <Button variant="ghost" size="icon" className="h-8 w-8"><SiYoutube className="h-3.5 w-3.5" /></Button>
                   </a>
                 )}
                 {socialLinks.instagram && (
                   <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer">
-                    <Button variant="ghost" size="icon" className="h-9 w-9"><SiInstagram className="h-4 w-4" /></Button>
+                    <Button variant="ghost" size="icon" className="h-8 w-8"><SiInstagram className="h-3.5 w-3.5" /></Button>
                   </a>
                 )}
                 {socialLinks.website && (
                   <a href={socialLinks.website} target="_blank" rel="noopener noreferrer">
-                    <Button variant="ghost" size="icon" className="h-9 w-9"><Globe className="h-4 w-4" /></Button>
+                    <Button variant="ghost" size="icon" className="h-8 w-8"><Globe className="h-3.5 w-3.5" /></Button>
                   </a>
                 )}
               </>
             )}
-            <Button variant="ghost" size="icon" className="h-9 w-9" data-testid="button-share-creator">
-              <Share2 className="h-4 w-4" />
+            <Button variant="ghost" size="icon" className="h-8 w-8" data-testid="button-share-creator">
+              <Share2 className="h-3.5 w-3.5" />
             </Button>
           </div>
         </div>
 
-        <div className="border-b border-border mb-5" />
+        <div className="border-b border-border mb-4" />
 
         {productsLoading ? (
           <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
