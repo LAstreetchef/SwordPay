@@ -41,7 +41,7 @@ const stats = [
 export default function Home() {
   useSEO({
     title: "Sword Creator - Best way for creators to get paid",
-    description: "Sword Creator is a membership platform that makes it easy for artists and creators to get paid. Join over 250,000 creators earning a living.",
+    description: "Profit from Your Passion. Create. Profit. Repeat. Discover and support creators on Sword Creator.",
   });
 
   const { data: featuredCreators, isLoading, error } = useQuery<Creator[]>({

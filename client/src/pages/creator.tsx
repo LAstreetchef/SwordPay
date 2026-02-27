@@ -113,8 +113,6 @@ export default function CreatorPage() {
 
         <div className="border-b border-border mb-5" />
 
-        <h2 className="text-lg font-semibold mb-4" data-testid="text-store-heading">Store</h2>
-
         {productsLoading ? (
           <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
             {Array.from({ length: 10 }).map((_, i) => (
