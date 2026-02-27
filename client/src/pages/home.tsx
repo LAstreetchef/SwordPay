@@ -211,12 +211,15 @@ export default function Home() {
                 className="h-full w-auto object-contain"
               />
             </div>
-            <div className="shrink-0">
+            <div className="shrink-0 flex flex-col items-center -mt-8">
               <img
                 src="/images/dazn-logo.png"
                 alt="DAZN"
                 className="w-24 md:w-36 opacity-90"
               />
+              <p className="text-white/80 text-xs md:text-sm font-semibold tracking-wider mt-3 uppercase">
+                Payment Partner of DAZN
+              </p>
             </div>
           </div>
         </div>
