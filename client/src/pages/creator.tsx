@@ -52,24 +52,11 @@ export default function CreatorPage() {
 
   return (
     <div className="min-h-screen" data-testid={`page-creator-${creator.slug}`}>
-      <div className="relative h-56 md:h-72">
-        {creator.coverUrl ? (
-          <img
-            src={creator.coverUrl}
-            alt={`${creator.name} cover`}
-            className="w-full h-full object-cover"
-          />
-        ) : (
-          <div className="w-full h-full bg-gradient-to-br from-primary/40 via-primary/20 to-accent" />
-        )}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-      </div>
-
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative -mt-16 mb-6 flex flex-col md:flex-row md:items-end gap-4 md:gap-6">
-          <Avatar className="h-28 w-28 border-4 border-background" data-testid="avatar-creator">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-16">
+        <div className="flex flex-col md:flex-row md:items-center gap-5 mb-10">
+          <Avatar className="h-20 w-20 border-2 border-border" data-testid="avatar-creator">
             <AvatarImage src={creator.avatarUrl} alt={creator.name} />
-            <AvatarFallback className="text-3xl font-bold bg-primary text-primary-foreground">
+            <AvatarFallback className="text-2xl font-bold bg-primary text-primary-foreground">
               {creator.name.charAt(0)}
             </AvatarFallback>
           </Avatar>
@@ -82,13 +69,13 @@ export default function CreatorPage() {
                 <CheckCircle className="h-5 w-5 text-primary" />
               )}
             </div>
-            <p className="text-muted-foreground mb-3">{creator.tagline}</p>
-            <div className="flex items-center gap-4 flex-wrap">
-              <Badge variant="secondary" className="no-default-active-elevate">
+            <p className="text-muted-foreground text-sm">{creator.tagline}</p>
+            <div className="flex items-center gap-3 mt-2 flex-wrap">
+              <Badge variant="secondary" className="no-default-active-elevate text-xs">
                 {creator.category}
               </Badge>
-              <span className="flex items-center gap-1.5 text-sm text-muted-foreground">
-                <Users className="h-4 w-4" />
+              <span className="flex items-center gap-1 text-xs text-muted-foreground">
+                <Users className="h-3.5 w-3.5" />
                 {creator.patronCount.toLocaleString()} patrons
               </span>
             </div>
@@ -98,46 +85,54 @@ export default function CreatorPage() {
               <>
                 {socialLinks.twitter && (
                   <a href={socialLinks.twitter} target="_blank" rel="noopener noreferrer">
-                    <Button variant="outline" size="icon"><SiX className="h-4 w-4" /></Button>
+                    <Button variant="ghost" size="icon" className="h-9 w-9"><SiX className="h-4 w-4" /></Button>
                   </a>
                 )}
                 {socialLinks.youtube && (
                   <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer">
-                    <Button variant="outline" size="icon"><SiYoutube className="h-4 w-4" /></Button>
+                    <Button variant="ghost" size="icon" className="h-9 w-9"><SiYoutube className="h-4 w-4" /></Button>
                   </a>
                 )}
                 {socialLinks.instagram && (
                   <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer">
-                    <Button variant="outline" size="icon"><SiInstagram className="h-4 w-4" /></Button>
+                    <Button variant="ghost" size="icon" className="h-9 w-9"><SiInstagram className="h-4 w-4" /></Button>
                   </a>
                 )}
                 {socialLinks.website && (
                   <a href={socialLinks.website} target="_blank" rel="noopener noreferrer">
-                    <Button variant="outline" size="icon"><Globe className="h-4 w-4" /></Button>
+                    <Button variant="ghost" size="icon" className="h-9 w-9"><Globe className="h-4 w-4" /></Button>
                   </a>
                 )}
               </>
             )}
-            <Button variant="outline" size="icon" data-testid="button-share-creator">
+            <Button variant="ghost" size="icon" className="h-9 w-9" data-testid="button-share-creator">
               <Share2 className="h-4 w-4" />
             </Button>
           </div>
         </div>
 
-        <div className="space-y-4 mb-16">
-          {productsLoading
-            ? Array.from({ length: 4 }).map((_, i) => (
-                <ProductCardSkeleton key={i} />
-              ))
-            : products && products.length > 0
-            ? products.map((product) => <ProductCard key={product.id} product={product} />)
-            : (
-              <div className="text-center py-12" data-testid="empty-products">
-                <ShoppingBag className="h-10 w-10 text-muted-foreground mx-auto mb-3" />
-                <p className="text-muted-foreground">No products available yet</p>
-              </div>
-            )}
-        </div>
+        <div className="border-b border-border mb-8" />
+
+        <h2 className="text-lg font-semibold mb-6" data-testid="text-store-heading">Store</h2>
+
+        {productsLoading ? (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-5 gap-y-8">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <ProductCardSkeleton key={i} />
+            ))}
+          </div>
+        ) : products && products.length > 0 ? (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-5 gap-y-8">
+            {products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-20" data-testid="empty-products">
+            <ShoppingBag className="h-10 w-10 text-muted-foreground mx-auto mb-3" />
+            <p className="text-muted-foreground">No products available yet</p>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -146,21 +141,22 @@ export default function CreatorPage() {
 function CreatorPageSkeleton() {
   return (
     <div className="min-h-screen">
-      <div className="h-56 md:h-72 bg-muted animate-pulse" />
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative -mt-16 mb-6 flex items-end gap-6">
-          <Skeleton className="h-28 w-28 rounded-full" />
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-16">
+        <div className="flex items-center gap-5 mb-10">
+          <Skeleton className="h-20 w-20 rounded-full" />
           <div className="space-y-2 flex-1">
-            <Skeleton className="h-8 w-48" />
-            <Skeleton className="h-5 w-72" />
-            <div className="flex gap-3">
-              <Skeleton className="h-6 w-20 rounded-full" />
-              <Skeleton className="h-5 w-24" />
+            <Skeleton className="h-7 w-48" />
+            <Skeleton className="h-4 w-72" />
+            <div className="flex gap-2">
+              <Skeleton className="h-5 w-20 rounded-full" />
+              <Skeleton className="h-4 w-24" />
             </div>
           </div>
         </div>
-        <div className="space-y-4">
-          {Array.from({ length: 4 }).map((_, i) => (
+        <div className="border-b border-border mb-8" />
+        <Skeleton className="h-5 w-16 mb-6" />
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-5 gap-y-8">
+          {Array.from({ length: 8 }).map((_, i) => (
             <ProductCardSkeleton key={i} />
           ))}
         </div>

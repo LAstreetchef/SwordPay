@@ -1,13 +1,16 @@
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { ShoppingCart, Download, Package, Wrench, Sparkles } from "lucide-react";
+import { Download, Package, Wrench } from "lucide-react";
 import type { Product } from "@shared/schema";
 
-const categoryConfig: Record<string, { label: string; icon: typeof Download; variant: "default" | "secondary" | "outline" }> = {
-  digital: { label: "Digital", icon: Download, variant: "secondary" },
-  physical: { label: "Physical", icon: Package, variant: "outline" },
-  service: { label: "Service", icon: Wrench, variant: "outline" },
+const categoryIcons: Record<string, typeof Download> = {
+  digital: Download,
+  physical: Package,
+  service: Wrench,
+};
+
+const categoryColors: Record<string, string> = {
+  digital: "bg-blue-500/10 text-blue-600 dark:text-blue-400",
+  physical: "bg-green-500/10 text-green-600 dark:text-green-400",
+  service: "bg-purple-500/10 text-purple-600 dark:text-purple-400",
 };
 
 function formatPrice(cents: number): string {
@@ -15,69 +18,52 @@ function formatPrice(cents: number): string {
 }
 
 export function ProductCard({ product }: { product: Product }) {
-  const config = categoryConfig[product.category] || categoryConfig.digital;
-  const CategoryIcon = config.icon;
+  const Icon = categoryIcons[product.category] || Download;
+  const colorClass = categoryColors[product.category] || categoryColors.digital;
 
   return (
-    <Card
-      className={`relative p-6 flex flex-col border-card-border ${product.isFeatured ? "ring-2 ring-primary" : ""}`}
+    <div
+      className="group cursor-pointer"
       data-testid={`card-product-${product.id}`}
     >
-      {product.isFeatured && (
-        <Badge className="absolute -top-2.5 left-1/2 -translate-x-1/2 no-default-active-elevate">
-          <Sparkles className="h-3 w-3 mr-1" />
-          Featured
-        </Badge>
-      )}
-      <div className="space-y-3 flex-1">
-        <div className="flex items-start justify-between gap-3">
-          <div className="flex-1">
-            <h3 className="font-semibold text-lg leading-tight" data-testid={`text-product-name-${product.id}`}>
-              {product.name}
-            </h3>
-          </div>
-          <Badge variant={config.variant} className="no-default-active-elevate flex-shrink-0">
-            <CategoryIcon className="h-3 w-3 mr-1" />
-            {config.label}
-          </Badge>
-        </div>
-        <p className="text-sm text-muted-foreground leading-relaxed">
-          {product.description}
-        </p>
-        <div className="flex items-center justify-between pt-1">
-          <span className="text-2xl font-bold" data-testid={`text-product-price-${product.id}`}>
-            {formatPrice(product.price)}
-          </span>
-          {product.salesCount > 0 && (
-            <span className="text-xs text-muted-foreground">
-              {product.salesCount.toLocaleString()} sold
+      <div className="aspect-square w-full overflow-hidden rounded-lg bg-muted mb-3">
+        {product.imageUrl ? (
+          <img
+            src={product.imageUrl}
+            alt={product.name}
+            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+          />
+        ) : (
+          <div className={`w-full h-full flex flex-col items-center justify-center gap-3 ${colorClass}`}>
+            <Icon className="h-12 w-12 opacity-60" />
+            <span className="text-xs font-medium uppercase tracking-wider opacity-50">
+              {product.category}
             </span>
-          )}
-        </div>
+          </div>
+        )}
       </div>
-      <Button className="w-full mt-4" data-testid={`button-buy-product-${product.id}`}>
-        <ShoppingCart className="h-4 w-4 mr-2" />
-        Buy Now
-      </Button>
-    </Card>
+      <h3
+        className="font-semibold text-sm leading-snug mb-1 group-hover:text-primary transition-colors"
+        data-testid={`text-product-name-${product.id}`}
+      >
+        {product.name}
+      </h3>
+      <p
+        className="text-sm text-muted-foreground"
+        data-testid={`text-product-price-${product.id}`}
+      >
+        {formatPrice(product.price)}
+      </p>
+    </div>
   );
 }
 
 export function ProductCardSkeleton() {
   return (
-    <Card className="p-6 flex flex-col border-card-border">
-      <div className="space-y-3 flex-1">
-        <div className="flex items-start justify-between gap-3">
-          <div className="h-6 w-3/4 bg-muted animate-pulse rounded" />
-          <div className="h-5 w-16 bg-muted animate-pulse rounded-full" />
-        </div>
-        <div className="space-y-2">
-          <div className="h-4 w-full bg-muted animate-pulse rounded" />
-          <div className="h-4 w-2/3 bg-muted animate-pulse rounded" />
-        </div>
-        <div className="h-8 w-20 bg-muted animate-pulse rounded" />
-      </div>
-      <div className="h-10 w-full bg-muted animate-pulse rounded mt-4" />
-    </Card>
+    <div>
+      <div className="aspect-square w-full bg-muted animate-pulse rounded-lg mb-3" />
+      <div className="h-4 w-3/4 bg-muted animate-pulse rounded mb-2" />
+      <div className="h-4 w-16 bg-muted animate-pulse rounded" />
+    </div>
   );
 }
