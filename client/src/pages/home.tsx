@@ -1,3 +1,4 @@
+import { useState, useEffect, useCallback } from "react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -33,7 +34,43 @@ const categories = [
 ];
 
 
+function useHeroAnimation() {
+  const [phase, setPhase] = useState<"heading-in" | "heading-out" | "words">("heading-in");
+  const [wordIndex, setWordIndex] = useState(-1);
+  const words = ["Create.", "Profit.", "Repeat."];
+
+  const restart = useCallback(() => {
+    setPhase("heading-in");
+    setWordIndex(-1);
+  }, []);
+
+  useEffect(() => {
+    let timer: ReturnType<typeof setTimeout>;
+
+    if (phase === "heading-in") {
+      timer = setTimeout(() => setPhase("heading-out"), 2000);
+    } else if (phase === "heading-out") {
+      timer = setTimeout(() => {
+        setPhase("words");
+        setWordIndex(0);
+      }, 800);
+    } else if (phase === "words") {
+      if (wordIndex < words.length - 1) {
+        timer = setTimeout(() => setWordIndex((i) => i + 1), 600);
+      } else {
+        timer = setTimeout(() => restart(), 2500);
+      }
+    }
+
+    return () => clearTimeout(timer);
+  }, [phase, wordIndex, restart]);
+
+  return { phase, wordIndex, words };
+}
+
 export default function Home() {
+  const { phase, wordIndex, words } = useHeroAnimation();
+
   useSEO({
     title: "Sword Creator - Best way for creators to get paid",
     description: "Profit from Your Passion. Create. Profit. Repeat. Discover and support creators on Sword Creator.",
@@ -56,12 +93,35 @@ export default function Home() {
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-36">
           <div className="max-w-2xl">
-            <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight tracking-tight mb-6">
-              Profit from Your Passion
-            </h1>
-            <p className="text-4xl md:text-6xl font-bold text-white leading-tight tracking-tight mb-8 max-w-lg">
-              Create. Profit. Repeat.
-            </p>
+            <div className="h-[140px] md:h-[160px] mb-8 relative">
+              <h1
+                className={`text-4xl md:text-6xl font-bold text-white leading-tight tracking-tight absolute inset-0 transition-all duration-700 ease-in-out ${
+                  phase === "heading-in"
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 -translate-y-6"
+                }`}
+              >
+                Profit from Your Passion
+              </h1>
+              <p
+                className={`text-4xl md:text-6xl font-bold text-white leading-tight tracking-tight absolute inset-0 transition-opacity duration-500 ${
+                  phase === "words" ? "opacity-100" : "opacity-0"
+                }`}
+              >
+                {words.map((word, i) => (
+                  <span
+                    key={word}
+                    className={`inline-block mr-4 transition-all duration-400 ease-out ${
+                      i <= wordIndex
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 translate-y-4"
+                    }`}
+                  >
+                    {word}
+                  </span>
+                ))}
+              </p>
+            </div>
             <div className="flex flex-col sm:flex-row gap-3">
               <Link href="/explore">
                 <Button size="lg" className="text-base px-8" data-testid="button-hero-explore">
