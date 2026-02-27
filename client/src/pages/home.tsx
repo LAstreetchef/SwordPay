@@ -32,11 +32,6 @@ const categories = [
   { name: "Video", icon: Video, color: "text-pink-500" },
 ];
 
-const stats = [
-  { number: "250K+", label: "Active creators" },
-  { number: "8M+", label: "Active patrons" },
-  { number: "$3.5B+", label: "Earned by creators" },
-];
 
 export default function Home() {
   useSEO({
@@ -84,18 +79,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-16 border-b" data-testid="stats-section">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            {stats.map((stat) => (
-              <div key={stat.label} className="space-y-1">
-                <p className="text-3xl md:text-4xl font-bold text-primary">{stat.number}</p>
-                <p className="text-sm text-muted-foreground">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       <section className="py-20" data-testid="featured-creators-section">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
