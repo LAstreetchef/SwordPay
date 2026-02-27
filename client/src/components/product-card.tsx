@@ -37,7 +37,7 @@ export function ProductCard({ product }: { product: Product }) {
       className="group cursor-pointer"
       data-testid={`card-product-${product.id}`}
     >
-      <div className="aspect-square w-full overflow-hidden rounded-lg mb-3 relative">
+      <div className="aspect-square w-full max-w-[50%] overflow-hidden rounded-lg mb-3 relative">
         {product.imageUrl ? (
           <img
             src={product.imageUrl}
