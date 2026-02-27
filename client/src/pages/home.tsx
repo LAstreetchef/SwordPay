@@ -193,6 +193,35 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="relative overflow-hidden h-[250px] md:h-[300px]" data-testid="hero3-section">
+        <div className="absolute inset-0">
+          <img
+            src="/images/hero3-bg.webp"
+            alt=""
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
+        </div>
+        <div className="relative h-full flex items-center">
+          <div className="flex items-center h-full px-4 sm:px-6 lg:px-8 gap-6 md:gap-10">
+            <div className="h-[80%] shrink-0">
+              <img
+                src="/images/liga-strip.png"
+                alt="League logos"
+                className="h-full w-auto object-contain"
+              />
+            </div>
+            <div className="shrink-0">
+              <img
+                src="/images/dazn-logo.png"
+                alt="DAZN"
+                className="w-24 md:w-36 opacity-90"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="py-20" data-testid="featured-creators-section">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-4 mb-10">
