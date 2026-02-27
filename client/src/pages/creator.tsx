@@ -52,7 +52,7 @@ export default function CreatorPage() {
 
   return (
     <div className="min-h-screen" data-testid={`page-creator-${creator.slug}`}>
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-1.5 pb-12">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-0.5 pb-12">
         <div className="flex items-center gap-3 mb-4">
           <Avatar className="h-14 w-14 border-2 border-border" data-testid="avatar-creator">
             <AvatarImage src={creator.avatarUrl} alt={creator.name} />
