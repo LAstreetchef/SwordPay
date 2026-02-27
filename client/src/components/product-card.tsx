@@ -10,7 +10,7 @@ export function ProductCard({ product }: { product: Product }) {
       className="group cursor-pointer"
       data-testid={`card-product-${product.id}`}
     >
-      <div className="aspect-square w-full overflow-hidden rounded-lg mb-2 relative">
+      <div className="aspect-square w-3/4 overflow-hidden rounded-lg mb-2 relative">
         <img
           src={product.imageUrl || "/images/product-placeholder.png"}
           alt={product.name}
@@ -18,13 +18,13 @@ export function ProductCard({ product }: { product: Product }) {
         />
       </div>
       <h3
-        className="font-semibold text-sm leading-snug mb-1 group-hover:text-primary transition-colors"
+        className="font-semibold text-base leading-snug mb-1 group-hover:text-primary transition-colors"
         data-testid={`text-product-name-${product.id}`}
       >
         {product.name}
       </h3>
       <p
-        className="text-sm text-muted-foreground"
+        className="text-base text-muted-foreground"
         data-testid={`text-product-price-${product.id}`}
       >
         {formatPrice(product.price)}
