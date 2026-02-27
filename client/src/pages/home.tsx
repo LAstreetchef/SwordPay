@@ -88,19 +88,13 @@ export default function Home() {
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-36">
           <div className="max-w-2xl">
-            <div className="h-[140px] md:h-[160px] mb-8 relative">
-              <h1
-                className={`text-4xl md:text-6xl font-bold text-white leading-tight tracking-tight absolute inset-0 transition-all duration-700 ease-in-out ${
-                  phase === "heading-in"
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 -translate-y-6"
-                }`}
-              >
+            <div className="mb-8">
+              <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight tracking-tight mb-4">
                 Profit from Your Passion
               </h1>
               <p
-                className={`text-4xl md:text-6xl font-bold text-white leading-tight tracking-tight absolute inset-0 transition-opacity duration-500 ${
-                  phase === "words" ? "opacity-100" : "opacity-0"
+                className={`text-4xl md:text-6xl font-bold text-white leading-tight tracking-tight transition-opacity duration-500 ${
+                  phase === "words" || phase === "done" ? "opacity-100" : "opacity-0"
                 }`}
               >
                 {words.map((word, i) => (
