@@ -225,6 +225,52 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="py-16" data-testid="features-cards-section">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+              <div className="rounded-xl overflow-hidden mb-5 aspect-[4/3]">
+                <img
+                  src="/images/card-marketing.webp"
+                  alt="Marketing"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <h3 className="text-lg font-bold uppercase tracking-wide text-blue-600 mb-2">Marketing</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Join DAZN and other leading brands on SWORD, and gain access to a global audience.
+              </p>
+            </div>
+            <div>
+              <div className="rounded-xl overflow-hidden mb-5 aspect-[4/3]">
+                <img
+                  src="/images/card-payments.jpeg"
+                  alt="Global Payments"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <h3 className="text-lg font-bold uppercase tracking-wide text-blue-600 mb-2">Global Payments</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Accept and Send unlimited Payments from anywhere in the world.
+              </p>
+            </div>
+            <div>
+              <div className="rounded-xl overflow-hidden mb-5 aspect-[4/3]">
+                <img
+                  src="/images/card-conversion.jpeg"
+                  alt="Higher Conversion"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <h3 className="text-lg font-bold uppercase tracking-wide text-blue-600 mb-2">Higher Conversion</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Our streamlined checkout experience removes all friction, enhancing user retention and maximizing conversion.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="py-20" data-testid="featured-creators-section">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-4 mb-10">
