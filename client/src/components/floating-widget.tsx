@@ -16,21 +16,21 @@ export function FloatingWidget() {
       >
         <X className="h-4 w-4" />
       </button>
-      <div className="p-3">
+      <div className="px-4 pt-8 pb-2 text-center">
+        <p className="font-bold text-sm mb-0.5">Sell your content in seconds</p>
+        <p className="text-xs text-muted-foreground mb-3">Set a price, upload, and share your link.</p>
+        <a href="https://swordpay.me" target="_blank" rel="noopener noreferrer" className="block mb-3">
+          <Button className="w-full bg-blue-600 hover:bg-blue-700 rounded-full text-sm font-semibold" data-testid="button-try-it-now">
+            Try It Now
+          </Button>
+        </a>
+      </div>
+      <div className="px-3 pb-3">
         <img
           src="/images/fileshare-preview.png"
           alt="SWORD FileShare"
           className="w-full rounded-xl"
         />
-      </div>
-      <div className="px-4 pb-2 text-center">
-        <p className="font-bold text-sm mb-0.5">Sell your content in seconds</p>
-        <p className="text-xs text-muted-foreground mb-3">Set a price, upload, and share your link.</p>
-        <a href="https://swordpay.me" target="_blank" rel="noopener noreferrer" className="block">
-          <Button className="w-full bg-blue-600 hover:bg-blue-700 rounded-full text-sm font-semibold mb-2" data-testid="button-try-it-now">
-            Try It Now
-          </Button>
-        </a>
       </div>
     </div>
   );
