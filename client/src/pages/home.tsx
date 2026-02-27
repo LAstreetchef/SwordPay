@@ -63,8 +63,43 @@ function useHeroAnimation() {
   return { phase, wordIndex, words };
 }
 
+const hero2Slides = [
+  {
+    image: "/images/hero2-3.jpeg",
+    lines: ["FOR", "FREELANCERS", "SECURE", "PAYMENTS"],
+  },
+  {
+    image: "/images/hero2-1.webp",
+    lines: ["FOR DIGITAL", "PLATFORMS", "FASTER EASIER", "CHECKOUTS"],
+  },
+  {
+    image: "/images/hero2-4.jpg",
+    lines: ["FOR DIGITAL", "PLATFORMS", "FASTER EASIER", "CHECKOUTS"],
+  },
+];
+
+function useHero2Animation() {
+  const [slideIndex, setSlideIndex] = useState(0);
+  const [textVisible, setTextVisible] = useState(true);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTextVisible(false);
+      setTimeout(() => {
+        setSlideIndex((i) => (i + 1) % hero2Slides.length);
+        setTextVisible(true);
+      }, 600);
+    }, 3500);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return { slide: hero2Slides[slideIndex], textVisible };
+}
+
 export default function Home() {
   const { phase, wordIndex, words } = useHeroAnimation();
+  const { slide, textVisible } = useHero2Animation();
 
   useSEO({
     title: "Sword Creator - Best way for creators to get paid",
@@ -122,6 +157,41 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="relative overflow-hidden h-[500px] md:h-[600px]" data-testid="hero2-section">
+        {hero2Slides.map((s, i) => (
+          <div
+            key={i}
+            className={`absolute inset-0 transition-opacity duration-600 ${
+              s === slide ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            <img
+              src={s.image}
+              alt=""
+              className="w-full h-full object-cover"
+            />
+          </div>
+        ))}
+        <div className="absolute inset-0 bg-black/50" />
+        <div className="relative h-full flex items-center justify-center">
+          <div
+            className={`text-center transition-all duration-500 ${
+              textVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+            }`}
+          >
+            {slide.lines.map((line, i) => (
+              <p
+                key={`${slide.image}-${i}`}
+                className={`font-bold text-white leading-tight tracking-tight ${
+                  i % 2 === 0 ? "text-2xl md:text-4xl text-white/70" : "text-4xl md:text-6xl"
+                }`}
+              >
+                {line}
+              </p>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section className="py-20" data-testid="featured-creators-section">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
