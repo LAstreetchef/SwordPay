@@ -47,8 +47,8 @@ async function createThumbnail(index: number, swordBuffer: Buffer): Promise<stri
   const bgFile = BACKGROUND_IMAGES[index % BACKGROUND_IMAGES.length];
   const bgPath = path.join(IMAGES_DIR, bgFile);
   const size = 400;
-  const swordSize = 140;
-  const circleRadius = 90;
+  const swordSize = 200;
+  const circleRadius = 120;
   
   // Load and resize background image to square
   const bgBuffer = await sharp(bgPath)
