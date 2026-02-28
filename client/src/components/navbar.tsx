@@ -13,8 +13,8 @@ export function Navbar() {
         <div className="flex items-center justify-between gap-4 h-10">
           <div className="flex items-center">
             <Link href="/" data-testid="link-home">
-              <span className="text-3xl font-bold tracking-tight text-foreground">
-                <span className="text-blue-600">SWORD PAY</span>
+              <span className="text-3xl font-black tracking-wide text-[#1e3a8a]">
+                SWORDPAY
               </span>
             </Link>
           </div>
