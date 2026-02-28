@@ -1,7 +1,7 @@
 import "dotenv/config";
 import sharp from "sharp";
 import { db, pool } from "./db";
-import { products, creators } from "@shared/schema";
+import { products } from "@shared/schema";
 import { eq } from "drizzle-orm";
 import * as fs from "fs";
 import * as path from "path";
@@ -12,6 +12,7 @@ const __dirname = path.dirname(__filename);
 
 const IMAGES_DIR = path.join(__dirname, "../client/public/images");
 const THUMBNAILS_DIR = path.join(IMAGES_DIR, "thumbnails");
+const SWORD_ICON = path.join(IMAGES_DIR, "sword-icon.png");
 
 // Ensure thumbnails directory exists
 if (!fs.existsSync(THUMBNAILS_DIR)) {
@@ -42,34 +43,7 @@ const GRADIENTS = [
   { from: "#834d9b", to: "#d04ed6" },  // magenta
 ];
 
-// Sword icon SVG (the SwordPay logo - matches product-placeholder.png)
-const SWORD_SVG = `
-<svg width="80" height="120" viewBox="0 0 80 120" xmlns="http://www.w3.org/2000/svg">
-  <g fill="none" stroke="#1e40af" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-    <!-- Blade tip -->
-    <line x1="40" y1="5" x2="40" y2="45"/>
-    <!-- Cross guard -->
-    <line x1="20" y1="25" x2="60" y2="25"/>
-    <!-- Left side of shield/pommel -->
-    <line x1="25" y1="45" x2="25" y2="100"/>
-    <!-- Right side of shield/pommel -->
-    <line x1="55" y1="45" x2="55" y2="100"/>
-    <!-- Center line through handle -->
-    <line x1="40" y1="45" x2="40" y2="115"/>
-    <!-- Shield bottom left -->
-    <line x1="25" y1="100" x2="40" y2="115"/>
-    <!-- Shield bottom right -->
-    <line x1="55" y1="100" x2="40" y2="115"/>
-    <!-- Top connector left -->
-    <line x1="25" y1="45" x2="40" y2="45"/>
-    <!-- Top connector right -->
-    <line x1="40" y1="45" x2="55" y2="45"/>
-  </g>
-</svg>
-`;
-
-async function createGradientImage(fromColor: string, toColor: string, size: number = 400): Promise<Buffer> {
-  // Create SVG gradient
+async function createGradientBackground(fromColor: string, toColor: string, size: number = 400): Promise<Buffer> {
   const svg = `
     <svg width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">
       <defs>
@@ -82,49 +56,68 @@ async function createGradientImage(fromColor: string, toColor: string, size: num
     </svg>
   `;
   
-  return Buffer.from(svg);
+  return sharp(Buffer.from(svg)).png().toBuffer();
 }
 
-async function createThumbnail(index: number): Promise<string> {
+async function createThumbnail(index: number, swordBuffer: Buffer): Promise<string> {
   const gradient = GRADIENTS[index % GRADIENTS.length];
   const size = 400;
+  const swordSize = 140; // Sword icon size - proportional to thumbnail
+  const circleRadius = 85;
   
   // Create gradient background
-  const bgSvg = await createGradientImage(gradient.from, gradient.to, size);
+  const bgBuffer = await createGradientBackground(gradient.from, gradient.to, size);
   
-  // Create sword overlay SVG with white semi-transparent background circle
-  const swordWithBg = Buffer.from(`
+  // Create white circle with sword on it (pre-composited)
+  // First create the circle
+  const circleSvg = `
     <svg width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="${size/2}" cy="${size/2}" r="70" fill="rgba(255,255,255,0.85)"/>
-      <g transform="translate(${size/2 - 40}, ${size/2 - 60})">
-        ${SWORD_SVG.replace(/<\/?svg[^>]*>/g, '')}
-      </g>
+      <circle cx="${size/2}" cy="${size/2}" r="${circleRadius}" fill="white"/>
     </svg>
-  `);
+  `;
+  
+  // Create white circle buffer
+  const circleBuffer = await sharp(Buffer.from(circleSvg)).png().toBuffer();
+  
+  // Resize sword icon and extract just the sword (make white transparent)
+  const resizedSword = await sharp(swordBuffer)
+    .resize(swordSize, swordSize, { fit: 'contain', background: { r: 255, g: 255, b: 255, alpha: 1 } })
+    .png()
+    .toBuffer();
   
   const filename = `product-thumb-${index + 1}.png`;
   const filepath = path.join(THUMBNAILS_DIR, filename);
   
-  // Composite the images
-  await sharp(bgSvg)
-    .resize(size, size)
-    .png()
-    .composite([{
-      input: swordWithBg,
-      blend: 'over'
-    }])
+  // Position sword in center
+  const swordLeft = Math.floor((size - swordSize) / 2);
+  const swordTop = Math.floor((size - swordSize) / 2);
+  
+  // Composite: gradient -> white circle -> sword (multiply blend to show only the blue)
+  await sharp(bgBuffer)
+    .composite([
+      { input: circleBuffer, blend: 'over' },
+      { input: resizedSword, left: swordLeft, top: swordTop, blend: 'multiply' }
+    ])
     .toFile(filepath);
   
   return `/images/thumbnails/${filename}`;
 }
 
 async function generateAllThumbnails() {
+  console.log("Loading sword icon...");
+  
+  // Load the sword icon
+  const swordBuffer = await sharp(SWORD_ICON)
+    .flatten({ background: { r: 255, g: 255, b: 255 } }) // Remove any alpha, use white bg
+    .png()
+    .toBuffer();
+  
   console.log("Generating thumbnails...");
   
   // Generate 20 different thumbnails
   const thumbnailUrls: string[] = [];
   for (let i = 0; i < 20; i++) {
-    const url = await createThumbnail(i);
+    const url = await createThumbnail(i, swordBuffer);
     thumbnailUrls.push(url);
     console.log(`Created thumbnail ${i + 1}: ${url}`);
   }

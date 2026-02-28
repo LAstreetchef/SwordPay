@@ -70,140 +70,73 @@ export default function HowItWorks() {
   return (
     <div className="min-h-screen" data-testid="page-how-it-works">
       <section className="bg-card border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
-          <h1 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight">
-            How Sword Creator works
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 text-center">
+          <h1 className="text-3xl md:text-5xl font-bold mb-2 tracking-tight">
+            How SWORD works
           </h1>
-          <p className="text-lg text-muted-foreground max-w-xl mx-auto mb-8">
-            A membership platform connecting creators with their biggest fans for
-            recurring support and exclusive content.
+          <p className="text-[21px] text-blue-600 max-w-xl mx-auto">
+            Payments for the Digital Economy
           </p>
-          <Link href="/explore">
-            <Button size="lg" className="text-base" data-testid="button-hiw-explore">
-              Explore creators
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </Link>
         </div>
       </section>
 
-      <section className="py-20" data-testid="steps-section">
+      <section className="pt-[20px] pb-0" data-testid="steps-section">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-14">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-[32px]">
             Three simple steps
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-            {[
-              {
-                step: 1,
-                icon: Heart,
-                title: "Find your creator",
-                description: "Browse thousands of creators across categories like art, music, podcasts, gaming, and more. Find someone whose work resonates with you.",
-              },
-              {
-                step: 2,
-                icon: Shield,
-                title: "Choose your tier",
-                description: "Each creator offers different membership levels with unique perks. Pick the one that fits your budget and get instant access to benefits.",
-              },
-              {
-                step: 3,
-                icon: TrendingUp,
-                title: "Enjoy the experience",
-                description: "Unlock exclusive content, join the community, and know that your support directly helps creators do what they love.",
-              },
-            ].map((item) => (
-              <div key={item.step} className="text-center space-y-5">
-                <div className="relative mx-auto">
-                  <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto">
-                    <item.icon className="h-7 w-7 text-primary" />
-                  </div>
-                  <span className="absolute -top-1 -right-1 w-7 h-7 rounded-full bg-primary text-primary-foreground text-sm font-bold flex items-center justify-center">
-                    {item.step}
-                  </span>
-                </div>
-                <h3 className="text-lg font-semibold">{item.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed max-w-sm mx-auto">
-                  {item.description}
-                </p>
+            {/* Step 1: Set Price with Video */}
+            <div className="text-center space-y-2.5">
+              <h3 className="text-[22px] font-semibold">SET PRICE</h3>
+              <div className="rounded-xl overflow-hidden shadow-lg max-w-[202px] mx-auto transition-transform duration-300 hover:scale-[1.65] cursor-pointer">
+                <video 
+                  className="w-full h-auto"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                >
+                  <source src="/set-price.mp4" type="video/mp4" />
+                </video>
               </div>
-            ))}
+            </div>
+
+            {/* Step 2: Add File with Video */}
+            <div className="text-center space-y-2.5">
+              <h3 className="text-[22px] font-semibold">ADD FILE</h3>
+              <div className="rounded-xl overflow-hidden shadow-lg max-w-[202px] mx-auto transition-transform duration-300 hover:scale-[1.65] cursor-pointer">
+                <video 
+                  className="w-full h-auto"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                >
+                  <source src="/add-file.mp4" type="video/mp4" />
+                </video>
+              </div>
+            </div>
+
+            {/* Step 3: Share with Video */}
+            <div className="text-center space-y-2.5">
+              <h3 className="text-[22px] font-semibold">SHARE</h3>
+              <div className="rounded-xl overflow-hidden shadow-lg max-w-[202px] mx-auto transition-transform duration-300 hover:scale-[1.65] cursor-pointer">
+                <video 
+                  className="w-full h-auto"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                >
+                  <source src="/share.mp4" type="video/mp4" />
+                </video>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="py-20 bg-card" data-testid="creator-benefits-section">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <h2 className="text-2xl md:text-3xl font-bold mb-3">For creators</h2>
-            <p className="text-muted-foreground max-w-md mx-auto">
-              Everything you need to build a thriving creative business
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {creatorBenefits.map((benefit) => (
-              <Card key={benefit.title} className="p-6 border-card-border">
-                <div className="flex gap-4">
-                  <div className="w-10 h-10 rounded-md bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <benefit.icon className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold mb-1">{benefit.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      {benefit.description}
-                    </p>
-                  </div>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20" data-testid="patron-benefits-section">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <h2 className="text-2xl md:text-3xl font-bold mb-3">For patrons</h2>
-            <p className="text-muted-foreground max-w-md mx-auto">
-              Get closer to the creators you admire
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {patronBenefits.map((benefit) => (
-              <Card key={benefit.title} className="p-6 border-card-border">
-                <div className="flex gap-4">
-                  <div className="w-10 h-10 rounded-md bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <benefit.icon className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold mb-1">{benefit.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      {benefit.description}
-                    </p>
-                  </div>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 bg-primary text-primary-foreground">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl md:text-4xl font-bold mb-4">
-            Ready to get started?
-          </h2>
-          <p className="text-lg opacity-90 mb-8 max-w-lg mx-auto">
-            Whether you're a creator or a patron, there's a place for you here.
-          </p>
-          <Link href="/explore">
-            <Button size="lg" variant="outline" className="text-base px-8 bg-white/15 backdrop-blur-sm border-white/30 text-white" data-testid="button-hiw-cta">
-              Find a creator
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </Link>
-        </div>
-      </section>
     </div>
   );
 }

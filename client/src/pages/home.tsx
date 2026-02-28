@@ -225,144 +225,53 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="pt-3 pb-0" data-testid="features-cards-section">
+      <section className="py-3" data-testid="features-cards-section">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-4">Profit Beyond Borders.</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
-              <div className="rounded-xl overflow-hidden mb-5 aspect-[4/3]">
+              <div className="rounded-xl overflow-hidden mb-1 aspect-[4/3]">
                 <img
                   src="/images/card-marketing.webp"
                   alt="Marketing"
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-xl font-extrabold uppercase tracking-wide text-blue-600 mb-2">Marketing</h3>
+              <h3 className="text-xl font-extrabold uppercase tracking-wide text-blue-600 mb-0">Marketing</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 Join DAZN and other leading brands on SWORD, and gain access to a global audience.
               </p>
             </div>
             <div>
-              <div className="rounded-xl overflow-hidden mb-5 aspect-[4/3]">
+              <div className="rounded-xl overflow-hidden mb-1 aspect-[4/3]">
                 <img
                   src="/images/card-payments.jpeg"
                   alt="Global Payments"
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-xl font-extrabold uppercase tracking-wide text-blue-600 mb-2">Global Payments</h3>
+              <h3 className="text-xl font-extrabold uppercase tracking-wide text-blue-600 mb-0">Global Payments</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 Accept and Send unlimited Payments from anywhere in the world.
               </p>
             </div>
             <div>
-              <div className="rounded-xl overflow-hidden mb-5 aspect-[4/3]">
+              <div className="rounded-xl overflow-hidden mb-1 aspect-[4/3]">
                 <img
                   src="/images/card-conversion.jpeg"
                   alt="Higher Conversion"
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-xl font-extrabold uppercase tracking-wide text-blue-600 mb-2">Higher Conversion</h3>
+              <h3 className="text-xl font-extrabold uppercase tracking-wide text-blue-600 mb-0">Higher Conversion</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                Our streamlined checkout experience removes all friction, enhancing user retention and maximizing conversion.
+                Our EXPRESS CHECKOUT removes all friction, enhancing user retention and maximizing conversion.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-20" data-testid="featured-creators-section">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between gap-4 mb-10">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-bold mb-2">Featured creators</h2>
-              <p className="text-muted-foreground">Discover amazing creators building communities</p>
-            </div>
-            <Link href="/explore">
-              <Button variant="outline" size="sm" data-testid="button-see-all-creators">
-                See all
-                <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
-              </Button>
-            </Link>
-          </div>
-          {error ? (
-            <div className="text-center py-12" data-testid="error-featured-creators">
-              <AlertCircle className="h-10 w-10 text-muted-foreground mx-auto mb-3" />
-              <p className="text-muted-foreground">Unable to load creators right now. Please try again later.</p>
-            </div>
-          ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {isLoading
-              ? Array.from({ length: 6 }).map((_, i) => <CreatorCardSkeleton key={i} />)
-              : featuredCreators?.map((creator) => (
-                  <CreatorCard key={creator.id} creator={creator} />
-                ))}
-          </div>
-          )}
-        </div>
-      </section>
-
-
-      <section className="py-20" data-testid="how-it-works-section">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <h2 className="text-2xl md:text-3xl font-bold mb-3">How Sword Creator works</h2>
-            <p className="text-muted-foreground max-w-md mx-auto">
-              A simple way to support the creators you love
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: Heart,
-                title: "Find a creator you love",
-                description: "Browse thousands of creators across art, music, podcasts, gaming, and more.",
-              },
-              {
-                icon: Shield,
-                title: "Choose a membership tier",
-                description: "Pick a tier that fits your budget and get exclusive benefits from your favorite creators.",
-              },
-              {
-                icon: TrendingUp,
-                title: "Unlock exclusive content",
-                description: "Get behind-the-scenes access, early releases, community perks, and more.",
-              },
-            ].map((step, i) => (
-              <div key={step.title} className="text-center space-y-4">
-                <div className="mx-auto w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center">
-                  <step.icon className="h-6 w-6 text-primary" />
-                </div>
-                <div className="flex items-center justify-center gap-2">
-                  <span className="text-xs font-semibold text-primary bg-primary/10 rounded-full w-6 h-6 flex items-center justify-center">
-                    {i + 1}
-                  </span>
-                  <h3 className="font-semibold text-lg">{step.title}</h3>
-                </div>
-                <p className="text-sm text-muted-foreground leading-relaxed max-w-xs mx-auto">
-                  {step.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 bg-primary text-primary-foreground" data-testid="cta-section">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl md:text-4xl font-bold mb-4">Ready to support your favorite creators?</h2>
-          <p className="text-lg opacity-90 mb-8 max-w-lg mx-auto">
-            Join millions of patrons who are helping creators build sustainable careers.
-          </p>
-          <Link href="/explore">
-            <Button size="lg" variant="outline" className="text-base px-8 bg-white/15 backdrop-blur-sm border-white/30 text-white" data-testid="button-cta-explore">
-              Get started
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </Link>
-        </div>
-      </section>
     </div>
   );
 }
