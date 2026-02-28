@@ -1,36 +1,61 @@
 import { useState } from "react";
-import { X } from "lucide-react";
+import { ChevronUp, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function FloatingWidget() {
-  const [open, setOpen] = useState(true);
+  const [collapsed, setCollapsed] = useState(false);
 
-  if (!open) return null;
+  if (collapsed) {
+    return (
+      <div 
+        onClick={() => setCollapsed(false)}
+        className="fixed bottom-6 right-6 z-50 cursor-pointer hover:scale-105 transition-transform flex flex-col items-center gap-2"
+        style={{ width: '120px' }}
+        data-testid="floating-widget-collapsed"
+      >
+        <Button className="w-full bg-blue-600 hover:bg-blue-700 rounded-full text-xs font-semibold animate-pulse py-1 px-3">
+          Start Free Today
+        </Button>
+        <div className="relative w-full">
+          <img
+            src="/images/fileshare-new.jpg"
+            alt="SWORD FileShare"
+            className="w-full rounded-xl shadow-2xl border border-white/30"
+          />
+          <div className="absolute inset-0 bg-black/20 rounded-xl flex items-center justify-center">
+            <ChevronUp className="h-5 w-5 text-white" />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 w-[280px] bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/30 dark:border-white/10 overflow-hidden" data-testid="floating-widget">
+    <div className="fixed bottom-6 right-6 z-50 bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/30 dark:border-white/10 overflow-hidden" style={{ width: '265px', fontSize: '16px' }} data-testid="floating-widget">
       <button
-        onClick={() => setOpen(false)}
-        className="absolute top-2 right-2 text-muted-foreground hover:text-foreground z-10"
-        data-testid="button-close-widget"
+        onClick={() => setCollapsed(true)}
+        className="absolute top-1 right-1 text-muted-foreground hover:text-foreground z-10"
+        data-testid="button-collapse-widget"
       >
-        <X className="h-4 w-4" />
+        <ChevronDown className="h-3 w-3" />
       </button>
-      <div className="px-4 pt-8 pb-2 text-center">
-        <p className="font-bold text-sm mb-0.5">Sell your content in seconds</p>
-        <p className="text-xs text-muted-foreground mb-3">Set a price, upload, and share your link.</p>
-        <a href="https://swordpay.me" target="_blank" rel="noopener noreferrer" className="block mb-3">
-          <Button className="w-full bg-blue-600 hover:bg-blue-700 rounded-full text-sm font-semibold" data-testid="button-try-it-now">
-            Try It Now
+      <div className="px-3 pt-3 pb-1 text-center">
+        <p className="font-bold text-base leading-tight whitespace-nowrap">Sell your content in seconds</p>
+        <p className="text-base text-muted-foreground leading-tight whitespace-nowrap">Set a price, Upload, and Share</p>
+        <a href="https://swordpay.me" target="_blank" rel="noopener noreferrer" className="block">
+          <Button className="w-full bg-blue-600 hover:bg-blue-700 rounded-full text-sm font-semibold animate-pulse" data-testid="button-try-it-now">
+            Start Free Today
           </Button>
         </a>
       </div>
-      <div className="px-3 pb-3">
-        <img
-          src="/images/fileshare-preview.png"
-          alt="SWORD FileShare"
-          className="w-full rounded-xl"
-        />
+      <div className="px-2 pb-2">
+        <a href="https://swordpay.me" target="_blank" rel="noopener noreferrer">
+          <img
+            src="/images/fileshare-new.jpg"
+            alt="SWORD FileShare"
+            className="w-full rounded-xl hover:opacity-90 transition-opacity"
+          />
+        </a>
       </div>
     </div>
   );

@@ -18,15 +18,6 @@ export function Navbar() {
               </span>
             </Link>
             <div className="hidden md:flex items-center gap-1">
-              <Link href="/explore">
-                <Button
-                  variant={location === "/explore" ? "secondary" : "ghost"}
-                  size="sm"
-                  data-testid="link-explore"
-                >
-                  Explore
-                </Button>
-              </Link>
               <Link href="/how-it-works">
                 <Button
                   variant={location === "/how-it-works" ? "secondary" : "ghost"}
@@ -66,11 +57,6 @@ export function Navbar() {
 
       {mobileMenuOpen && (
         <div className="md:hidden border-t bg-background px-4 py-4 space-y-2" data-testid="mobile-menu">
-          <Link href="/explore" onClick={() => setMobileMenuOpen(false)}>
-            <Button variant="ghost" className="w-full justify-start" data-testid="mobile-link-explore">
-              Explore creators
-            </Button>
-          </Link>
           <Link href="/how-it-works" onClick={() => setMobileMenuOpen(false)}>
             <Button variant="ghost" className="w-full justify-start" data-testid="mobile-link-how-it-works">
               How it works
