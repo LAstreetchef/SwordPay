@@ -19,67 +19,52 @@ if (!fs.existsSync(THUMBNAILS_DIR)) {
   fs.mkdirSync(THUMBNAILS_DIR, { recursive: true });
 }
 
-// Different gradient backgrounds for variety
-const GRADIENTS = [
-  { from: "#FF6B6B", to: "#4ECDC4" },  // coral to teal
-  { from: "#667eea", to: "#764ba2" },  // purple gradient
-  { from: "#f093fb", to: "#f5576c" },  // pink
-  { from: "#4facfe", to: "#00f2fe" },  // blue cyan
-  { from: "#43e97b", to: "#38f9d7" },  // green mint
-  { from: "#fa709a", to: "#fee140" },  // pink yellow
-  { from: "#30cfd0", to: "#330867" },  // cyan purple
-  { from: "#a8edea", to: "#fed6e3" },  // soft pastel
-  { from: "#ff9a9e", to: "#fecfef" },  // soft pink
-  { from: "#667eea", to: "#00d4ff" },  // indigo blue
-  { from: "#f83600", to: "#f9d423" },  // orange yellow
-  { from: "#00c6fb", to: "#005bea" },  // sky blue
-  { from: "#8E2DE2", to: "#4A00E0" },  // deep purple
-  { from: "#FF416C", to: "#FF4B2B" },  // red orange
-  { from: "#654ea3", to: "#eaafc8" },  // purple pink
-  { from: "#11998e", to: "#38ef7d" },  // green gradient
-  { from: "#FC466B", to: "#3F5EFB" },  // pink blue
-  { from: "#0F2027", to: "#2C5364" },  // dark teal
-  { from: "#373B44", to: "#4286f4" },  // dark blue
-  { from: "#834d9b", to: "#d04ed6" },  // magenta
+// Background images to use
+const BACKGROUND_IMAGES = [
+  "cover-1.png",
+  "cover-2.png",
+  "cover-3.png",
+  "creator-1.png",
+  "creator-2.png",
+  "creator-3.png",
+  "creator-4.png",
+  "creator-5.png",
+  "creator-6.png",
+  "hero-bg.png",
+  "hero2-1.webp",
+  "hero2-2.webp",
+  "hero2-4.jpg",
+  "hero3-bg.webp",
+  "card-marketing.webp",
+  "fileshare-preview.png",
+  "card-payments.jpeg",
+  "card-conversion.jpeg",
+  "hero2-3.jpeg",
+  "liga-strip.png",
 ];
 
-async function createGradientBackground(fromColor: string, toColor: string, size: number = 400): Promise<Buffer> {
-  const svg = `
-    <svg width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:${fromColor};stop-opacity:1" />
-          <stop offset="100%" style="stop-color:${toColor};stop-opacity:1" />
-        </linearGradient>
-      </defs>
-      <rect width="100%" height="100%" fill="url(#grad)" rx="20" ry="20"/>
-    </svg>
-  `;
-  
-  return sharp(Buffer.from(svg)).png().toBuffer();
-}
-
 async function createThumbnail(index: number, swordBuffer: Buffer): Promise<string> {
-  const gradient = GRADIENTS[index % GRADIENTS.length];
+  const bgFile = BACKGROUND_IMAGES[index % BACKGROUND_IMAGES.length];
+  const bgPath = path.join(IMAGES_DIR, bgFile);
   const size = 400;
-  const swordSize = 140; // Sword icon size - proportional to thumbnail
-  const circleRadius = 85;
+  const swordSize = 140;
+  const circleRadius = 90;
   
-  // Create gradient background
-  const bgBuffer = await createGradientBackground(gradient.from, gradient.to, size);
+  // Load and resize background image to square
+  const bgBuffer = await sharp(bgPath)
+    .resize(size, size, { fit: 'cover', position: 'center' })
+    .png()
+    .toBuffer();
   
-  // Create white circle with sword on it (pre-composited)
-  // First create the circle
+  // Create semi-transparent white circle for visibility against photos
   const circleSvg = `
     <svg width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="${size/2}" cy="${size/2}" r="${circleRadius}" fill="white"/>
+      <circle cx="${size/2}" cy="${size/2}" r="${circleRadius}" fill="rgba(255,255,255,0.92)"/>
     </svg>
   `;
-  
-  // Create white circle buffer
   const circleBuffer = await sharp(Buffer.from(circleSvg)).png().toBuffer();
   
-  // Resize sword icon and extract just the sword (make white transparent)
+  // Resize sword icon
   const resizedSword = await sharp(swordBuffer)
     .resize(swordSize, swordSize, { fit: 'contain', background: { r: 255, g: 255, b: 255, alpha: 1 } })
     .png()
@@ -92,12 +77,28 @@ async function createThumbnail(index: number, swordBuffer: Buffer): Promise<stri
   const swordLeft = Math.floor((size - swordSize) / 2);
   const swordTop = Math.floor((size - swordSize) / 2);
   
-  // Composite: gradient -> white circle -> sword (multiply blend to show only the blue)
-  await sharp(bgBuffer)
-    .composite([
-      { input: circleBuffer, blend: 'over' },
-      { input: resizedSword, left: swordLeft, top: swordTop, blend: 'multiply' }
-    ])
+  // Add slight rounded corners to the final image
+  const roundedCornersMask = Buffer.from(`
+    <svg width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">
+      <rect width="${size}" height="${size}" rx="20" ry="20" fill="white"/>
+    </svg>
+  `);
+  
+  // First composite: background + white circle
+  const withCircle = await sharp(bgBuffer)
+    .composite([{ input: circleBuffer, blend: 'over' }])
+    .png()
+    .toBuffer();
+  
+  // Second composite: add sword with multiply (keeps only blue)
+  const withSword = await sharp(withCircle)
+    .composite([{ input: resizedSword, left: swordLeft, top: swordTop, blend: 'multiply' }])
+    .png()
+    .toBuffer();
+  
+  // Final: apply rounded corners
+  await sharp(withSword)
+    .composite([{ input: roundedCornersMask, blend: 'dest-in' }])
     .toFile(filepath);
   
   return `/images/thumbnails/${filename}`;
@@ -108,18 +109,22 @@ async function generateAllThumbnails() {
   
   // Load the sword icon
   const swordBuffer = await sharp(SWORD_ICON)
-    .flatten({ background: { r: 255, g: 255, b: 255 } }) // Remove any alpha, use white bg
+    .flatten({ background: { r: 255, g: 255, b: 255 } })
     .png()
     .toBuffer();
   
-  console.log("Generating thumbnails...");
+  console.log("Generating thumbnails with photo backgrounds...");
   
-  // Generate 20 different thumbnails
+  // Generate thumbnails for each background image
   const thumbnailUrls: string[] = [];
-  for (let i = 0; i < 20; i++) {
-    const url = await createThumbnail(i, swordBuffer);
-    thumbnailUrls.push(url);
-    console.log(`Created thumbnail ${i + 1}: ${url}`);
+  for (let i = 0; i < BACKGROUND_IMAGES.length; i++) {
+    try {
+      const url = await createThumbnail(i, swordBuffer);
+      thumbnailUrls.push(url);
+      console.log(`Created thumbnail ${i + 1}: ${url} (from ${BACKGROUND_IMAGES[i]})`);
+    } catch (err) {
+      console.error(`Error creating thumbnail ${i + 1} from ${BACKGROUND_IMAGES[i]}:`, err);
+    }
   }
   
   return thumbnailUrls;
@@ -129,6 +134,10 @@ async function updateProducts() {
   try {
     // Generate thumbnails first
     const thumbnailUrls = await generateAllThumbnails();
+    
+    if (thumbnailUrls.length === 0) {
+      throw new Error("No thumbnails were generated!");
+    }
     
     // Get all products
     const allProducts = await db.select().from(products);
@@ -150,7 +159,7 @@ async function updateProducts() {
       }
     }
     
-    console.log(`\nDone! Updated ${updated} products with unique thumbnails.`);
+    console.log(`\nDone! Updated ${updated} products with unique photo thumbnails.`);
   } finally {
     await pool.end();
     process.exit(0);
