@@ -9,7 +9,7 @@ export function FloatingWidget() {
     return (
       <div 
         onClick={() => setCollapsed(false)}
-        className="fixed bottom-6 right-6 z-50 cursor-pointer hover:scale-105 transition-transform flex flex-col items-center gap-2"
+        className="fixed bottom-6 right-6 z-50 cursor-pointer hover:scale-105 transition-transform flex flex-col items-center gap-0"
         style={{ width: '120px' }}
         data-testid="floating-widget-collapsed"
       >
