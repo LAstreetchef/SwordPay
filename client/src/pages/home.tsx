@@ -148,7 +148,7 @@ export default function Home() {
             </div>
             <div className="flex flex-col sm:flex-row gap-3">
               <Link href="/how-it-works">
-                <Button size="lg" className="text-base px-8 bg-blue-600 hover:bg-blue-700" data-testid="button-hero-create">
+                <Button size="lg" className="text-lg px-8 bg-blue-600 hover:bg-blue-700" data-testid="button-hero-create">
                   Start Sharing
                 </Button>
               </Link>
