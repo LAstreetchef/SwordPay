@@ -7,7 +7,7 @@ export function FloatingWidget() {
 
   if (collapsed) {
     return (
-      <div 
+      <div
         onClick={() => setCollapsed(false)}
         className="fixed bottom-6 right-6 z-50 cursor-pointer hover:scale-105 transition-transform flex flex-col items-center gap-0"
         style={{ width: '120px' }}
@@ -23,10 +23,10 @@ export function FloatingWidget() {
             alt="SWORD FileShare"
             className="w-full rounded-xl shadow-2xl border border-white/30"
           />
-          <div className="absolute inset-0 rounded-xl pointer-events-none">
-            <span className="absolute text-base font-black text-black tracking-wider whitespace-nowrap bg-white/60 rounded px-1" style={{top:'28%', left:'50%', transform:'translateX(-50%)'}}>SET PRICE</span>
-            <span className="absolute text-base font-black text-black tracking-wider whitespace-nowrap bg-white/60 rounded px-1" style={{top:'50%', left:'30%', transform:'translateX(-50%)'}}>ADD FILE</span>
-            <span className="absolute text-base font-black text-black tracking-wider whitespace-nowrap bg-white/60 rounded px-1" style={{top:'68%', left:'50%', transform:'translateX(-50%)'}}>SHARE</span>
+          <div className="absolute inset-0 rounded-xl pointer-events-none flex flex-col justify-around items-center py-2">
+            <span className="text-sm font-black text-black tracking-wider w-full text-center">SET PRICE</span>
+            <span className="text-sm font-black text-black tracking-wider w-full text-center">ADD FILE</span>
+            <span className="text-sm font-black text-black tracking-wider w-full text-center">SHARE</span>
           </div>
         </div>
       </div>
