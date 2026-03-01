@@ -44,7 +44,7 @@ export function FloatingWidget() {
       </button>
       <div className="px-3 pt-3 pb-0 text-center">
         <p className="font-bold text-base leading-tight whitespace-nowrap">Sell your content in seconds</p>
-        <p className="text-base text-muted-foreground leading-tight whitespace-nowrap">Set a price, Upload, and Share</p>
+        <p className="text-base text-muted-foreground leading-tight whitespace-nowrap">Set Price, Upload, and Share</p>
         <a href="https://swordpay.me" target="_blank" rel="noopener noreferrer" className="block mt-1">
           <Button className="w-full bg-blue-600 hover:bg-blue-700 rounded-full text-sm font-semibold animate-pulse" data-testid="button-try-it-now">
             Start Free Today
