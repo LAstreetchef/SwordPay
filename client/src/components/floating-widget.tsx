@@ -24,7 +24,7 @@ export function FloatingWidget() {
             className="w-full rounded-xl shadow-2xl border border-white/30"
           />
           <div className="absolute inset-0 rounded-xl pointer-events-none flex flex-col justify-around items-center py-2">
-            <span className="text-sm font-black text-black tracking-wider text-center bg-white/90 rounded px-1">SET PRICE</span>
+            <span className="text-sm font-black text-black tracking-wider text-center bg-white rounded px-2 py-1 block w-full">SET PRICE</span>
             <span className="text-sm font-black text-black tracking-wider text-center bg-white/90 rounded px-1">ADD FILE</span>
             <span className="text-sm font-black text-black tracking-wider text-center bg-white/90 rounded px-1">SHARE</span>
           </div>
