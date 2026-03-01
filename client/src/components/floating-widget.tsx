@@ -51,15 +51,19 @@ export function FloatingWidget() {
           </Button>
         </a>
       </div>
-      <div className="px-2 pb-2 pt-0 relative">
+      <div className="relative">
         <a href="https://swordpay.me" target="_blank" rel="noopener noreferrer">
           <img
             src="/images/fileshare-new.jpg"
             alt="SWORD FileShare"
-            className="w-full rounded-xl hover:opacity-90 transition-opacity"
+            className="w-full hover:opacity-90 transition-opacity"
           />
         </a>
-
+        <div className="absolute inset-0 pointer-events-none flex flex-col justify-between py-3 px-3">
+          <span className="text-2xl font-black text-black tracking-wider">SET PRICE</span>
+          <span className="text-2xl font-black text-black tracking-wider">ADD FILE</span>
+          <span className="text-2xl font-black text-black tracking-wider">SHARE</span>
+        </div>
       </div>
     </div>
   );
