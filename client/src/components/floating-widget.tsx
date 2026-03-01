@@ -39,7 +39,7 @@ export function FloatingWidget() {
       >
         <ChevronDown className="h-3 w-3" />
       </button>
-      <div className="px-3 pt-3 pb-1 text-center">
+      <div className="px-3 pt-3 pb-0 text-center">
         <p className="font-bold text-base leading-tight whitespace-nowrap">Sell your content in seconds</p>
         <p className="text-base text-muted-foreground leading-tight whitespace-nowrap">Set a price, Upload, and Share</p>
         <a href="https://swordpay.me" target="_blank" rel="noopener noreferrer" className="block">
@@ -48,7 +48,7 @@ export function FloatingWidget() {
           </Button>
         </a>
       </div>
-      <div className="px-2 pb-2">
+      <div className="px-2 pb-2 pt-0">
         <a href="https://swordpay.me" target="_blank" rel="noopener noreferrer">
           <img
             src="/images/fileshare-new.jpg"
