@@ -23,8 +23,10 @@ export function FloatingWidget() {
             alt="SWORD FileShare"
             className="w-full rounded-xl shadow-2xl border border-white/30"
           />
-          <div className="absolute inset-0 bg-black/20 rounded-xl flex items-center justify-center">
-            <ChevronUp className="h-5 w-5 text-white" />
+          <div className="absolute inset-0 rounded-xl flex flex-col items-center justify-around px-2 py-3">
+            <span className="text-sm font-black text-black tracking-wider">SET PRICE</span>
+            <span className="text-sm font-black text-black tracking-wider">ADD FILE</span>
+            <span className="text-sm font-black text-black tracking-wider">SHARE</span>
           </div>
         </div>
       </div>
@@ -57,11 +59,7 @@ export function FloatingWidget() {
             className="w-full rounded-xl hover:opacity-90 transition-opacity"
           />
         </a>
-        <div className="absolute inset-0 flex flex-col items-center justify-around pointer-events-none px-2 py-3">
-          <span className="text-xl font-black text-black drop-shadow-lg tracking-wider">SET PRICE</span>
-          <span className="text-xl font-black text-black drop-shadow-lg tracking-wider">ADD FILE</span>
-          <span className="text-xl font-black text-black drop-shadow-lg tracking-wider">SHARE</span>
-        </div>
+
       </div>
     </div>
   );
