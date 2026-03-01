@@ -3,7 +3,7 @@ import { ChevronUp, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function FloatingWidget() {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
 
   if (collapsed) {
     return (
