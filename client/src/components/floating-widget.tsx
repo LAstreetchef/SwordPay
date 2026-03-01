@@ -23,10 +23,10 @@ export function FloatingWidget() {
             alt="SWORD FileShare"
             className="w-full rounded-xl shadow-2xl border border-white/30"
           />
-          <div className="absolute inset-0 rounded-xl flex flex-col items-center justify-around px-2 py-3">
-            <span className="text-sm font-black text-black tracking-wider">SET PRICE</span>
-            <span className="text-sm font-black text-black tracking-wider">ADD FILE</span>
-            <span className="text-sm font-black text-black tracking-wider">SHARE</span>
+          <div className="absolute inset-0 rounded-xl pointer-events-none">
+            <span className="absolute text-xs font-black text-black tracking-wider" style={{top:'18%', left:'50%', transform:'translateX(-50%)'}}>SET PRICE</span>
+            <span className="absolute text-xs font-black text-black tracking-wider" style={{top:'48%', left:'50%', transform:'translateX(-50%)'}}>ADD FILE</span>
+            <span className="absolute text-xs font-black text-black tracking-wider" style={{top:'72%', left:'50%', transform:'translateX(-50%)'}}>SHARE</span>
           </div>
         </div>
       </div>
@@ -59,11 +59,7 @@ export function FloatingWidget() {
             className="w-full hover:opacity-90 transition-opacity"
           />
         </a>
-        <div className="absolute inset-0 pointer-events-none flex flex-col justify-between py-3 px-3">
-          <span className="text-2xl font-black text-black tracking-wider">SET PRICE</span>
-          <span className="text-2xl font-black text-black tracking-wider">ADD FILE</span>
-          <span className="text-2xl font-black text-black tracking-wider">SHARE</span>
-        </div>
+
       </div>
     </div>
   );
