@@ -14,7 +14,7 @@ export function FloatingWidget() {
         data-testid="floating-widget-collapsed"
       >
 
-        <Button className="w-full bg-blue-600 hover:bg-blue-700 rounded-full text-xs font-semibold animate-pulse py-1 px-3">
+        <Button className="w-full bg-blue-600 hover:bg-blue-700 rounded-full font-semibold animate-pulse py-1 px-3" style={{fontSize:'13.2px'}}>
           Start Free Today
         </Button>
         <div className="relative w-full">
@@ -46,7 +46,7 @@ export function FloatingWidget() {
         <p className="font-bold text-base leading-tight whitespace-nowrap">Sell your content in seconds</p>
         <p className="text-base text-muted-foreground leading-tight whitespace-nowrap">Set Price, Upload, and Share</p>
         <a href="https://swordpay.me" target="_blank" rel="noopener noreferrer" className="block mt-1">
-          <Button className="w-full bg-blue-600 hover:bg-blue-700 rounded-full text-sm font-semibold animate-pulse" data-testid="button-try-it-now">
+          <Button className="w-full bg-blue-600 hover:bg-blue-700 rounded-full font-semibold animate-pulse" style={{fontSize:'15.4px'}} data-testid="button-try-it-now">
             Start Free Today
           </Button>
         </a>
