@@ -24,9 +24,9 @@ export function FloatingWidget() {
             className="w-full rounded-xl shadow-2xl border border-white/30"
           />
           <div className="absolute inset-0 rounded-xl pointer-events-none">
-            <span className="absolute text-xs font-black text-black tracking-wider whitespace-nowrap bg-white/60 rounded px-1" style={{top:'22%', left:'50%', transform:'translateX(-50%)'}}>SET PRICE</span>
-            <span className="absolute text-xs font-black text-black tracking-wider whitespace-nowrap bg-white/60 rounded px-1" style={{top:'56%', left:'50%', transform:'translateX(-50%)'}}>ADD FILE</span>
-            <span className="absolute text-xs font-black text-black tracking-wider whitespace-nowrap bg-white/60 rounded px-1" style={{top:'76%', left:'50%', transform:'translateX(-50%)'}}>SHARE</span>
+            <span className="absolute text-base font-black text-black tracking-wider whitespace-nowrap bg-white/60 rounded px-1" style={{top:'22%', left:'50%', transform:'translateX(-50%)'}}>SET PRICE</span>
+            <span className="absolute text-base font-black text-black tracking-wider whitespace-nowrap bg-white/60 rounded px-1" style={{top:'56%', left:'50%', transform:'translateX(-50%)'}}>ADD FILE</span>
+            <span className="absolute text-base font-black text-black tracking-wider whitespace-nowrap bg-white/60 rounded px-1" style={{top:'76%', left:'50%', transform:'translateX(-50%)'}}>SHARE</span>
           </div>
         </div>
       </div>
