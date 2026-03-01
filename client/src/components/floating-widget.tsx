@@ -13,7 +13,11 @@ export function FloatingWidget() {
         style={{ width: '120px' }}
         data-testid="floating-widget-collapsed"
       >
-        <p className="text-[10px] text-white font-bold leading-tight mb-1 text-center tracking-wide whitespace-nowrap">SET PRICE  ADD FILE  SHARE</p>
+        <div className="text-xs text-white font-bold leading-tight mb-1 text-center tracking-wide">
+          <p>SET PRICE</p>
+          <p>ADD FILE</p>
+          <p>SHARE</p>
+        </div>
         <Button className="w-full bg-blue-600 hover:bg-blue-700 rounded-full text-xs font-semibold animate-pulse py-1 px-3">
           Start Free Today
         </Button>
